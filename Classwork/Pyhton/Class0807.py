@@ -27,8 +27,8 @@ print(str1+str2)
 # method overloading defining many methods that have the same name but with different arguments
 
 # u r developing simple vehicle with the following: 
-# an init method that initailizes make and model
-# a method display details that prints the vehicle make and model
+#   an init method that initailizes make and model
+#   a method display details that prints the vehicle make and model
 
 # define a subclass car that inherits from vehicle with the following
 #     an init method that initialises make and model and number of doors
