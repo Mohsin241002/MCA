@@ -10,7 +10,7 @@ int main()
     char ch;
 
     printf("Enter a string: ");
-    fgets(str, sizeof(str), stdin);
+    scanf("%99[^\n]", str);
 
     for (int i = 0; str[i] != '\0'; i++)
     {

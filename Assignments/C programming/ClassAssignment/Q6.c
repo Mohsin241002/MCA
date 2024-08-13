@@ -18,7 +18,7 @@ int main()
     int length;
 
     printf("Enter a string: ");
-    fgets(str, sizeof(str), stdin);
+    scanf("%99[^\n]", str);
 
     length = stringLength(str);
 
