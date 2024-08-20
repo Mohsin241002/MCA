@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.example.com/games"
+           targetNamespace="http://www.example.com/games"
            elementFormDefault="qualified">
 
     <xs:element name="games">
@@ -18,7 +20,7 @@
                                         <xs:minInclusive value="0.0"/>
                                         <xs:maxInclusive value="5.0"/>
                                     </xs:restriction>
-                                </xs:simpleType>
+                                </xsimpleType>
                             </xs:element>
                             <xs:element name="platform" type="xs:string"/>
                             <xs:element name="developer" type="xs:string"/>
