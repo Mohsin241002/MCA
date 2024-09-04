@@ -1,0 +1,11 @@
+<!ELEMENT games (game+)>
+<!ELEMENT game (id, name, type, releaseDate, rating, platform, developer, price)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT type (#PCDATA)>
+<!ELEMENT releaseDate (#PCDATA)>
+<!ELEMENT rating (#PCDATA)>
+<!ELEMENT platform (#PCDATA)>
+<!ELEMENT developer (#PCDATA)>
+<!ELEMENT price (#PCDATA)>
+<!ATTLIST price currency CDATA #REQUIRED>

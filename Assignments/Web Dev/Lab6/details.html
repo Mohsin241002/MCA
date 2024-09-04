@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Details</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg custom-navbar">
+      <a class="navbar-brand" href="index.html"><i class="fas fa-gamepad"></i> Gaming Website</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="browse.html"><i class="fas fa-th-list"></i> Browse</a></li>
+          <li class="nav-item"><a class="nav-link" href="details.html"><i class="fas fa-info-circle"></i> Details</a></li>
+          <li class="nav-item"><a class="nav-link" href="apply.html"><i class="fas fa-edit"></i> Apply</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html"><i class="fas fa-address-card"></i> About</a></li>
+          <li class="nav-item"><a class="nav-link" href="display.html"><i class="fas fa-tv"></i> Display</a></li> <!-- New Display Page -->
+        </ul>
+      </div>
+    </nav>
+
+  <main>
+    <section class="game-details py-5">
+      <div class="container">
+        <h2 class="text-center">Games</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <img src="assets/Main.png" alt="Game Image" class="img-fluid" width="600" height="400">
+          </div>
+          <div class="col-md-6">
+            <p>A game is a structured activity with rules that people do for fun or entertainment, and can be physical or mental.</p>
+            <p><strong>Rating:</strong> 5/5</p>
+            <button class="btn btn-primary">Watch Streams</button>
+          </div>
+        </div>
+        <div class="game-features mt-5">
+          <h3>Game Features</h3>
+          <ul>
+            <li>Entertaining</li>
+            <li>Skill based</li>
+            <li>Relaxing</li>
+          </ul>
+        </div>
+        <div class="game-screenshots mt-5">
+          <h3>Screenshots</h3>
+          <div class="row">
+            <div class="col-md-4">
+              <img src="assets/mainss1.png" alt="Screenshot 1" class="img-fluid" width="400" height="200">
+            </div>
+            <div class="col-md-4">
+              <img src="assets/mainss2.png" alt="Screenshot 2" class="img-fluid" width="400" height="200">
+            </div>
+            <div class="col-md-4">
+              <img src="assets/mainss3.png" alt="Screenshot 3" class="img-fluid" width="400" height="200">
+            </div>
+          </div>
+        </div>
+        <div class="game-reviews mt-5">
+          <h3>Reviews</h3>
+          <div class="review">
+            <p><strong>Reviewer 1:</strong> Best Site for games</p>
+          </div>
+          <div class="review">
+            <p><strong>Reviewer 2:</strong> Must Visit</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="text-center py-4">
+    <p>&copy; 2024 Gaming Website. All rights reserved.</p>
+  </footer>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // Example game data
+    const games = {
+      "1": {
+        "title": "Valorant",
+        "image": "assets/Untitled-1.png",
+        "description": "Valorant is a free-to-play, first-person, tactical shooter video game for online multiplayer developed and published by Riot Games.",
+        "rating": "4.5/5",
+        "features": ["FPS", "Free to Play", "Tactical Shooter"],
+        "screenshots": [
+          "assets/Valoss1.png",
+          "assets/Valoss2.png",
+          "assets/Valoss3.png"
+        ],
+        "reviews": [
+          "Joel: Fun to play with friends",
+          "Ojas: Competitive"
+        ]
+      },
+      "2": {
+        "title": "Fortnite",
+        "image": "assets/Fortnitemain.png",
+        "description": "Fortnite is an online video game and game platform developed by Epic Games and released in 2017.",
+        "rating": "4.7/5",
+        "features": ["Fast Paced Action", "Building", "Battle Royale"],
+        "screenshots": [
+          "assets/Fortnitess1.png",
+          "assets/Fortnitess2.png",
+          "assets/Fortnitess3.png"
+        ],
+        "reviews": [
+          "Ezio: Great graphics",
+          "Mohsin: Excellent entertainment"
+        ]
+      },
+      "3": {
+        "title": "PubG",
+        "image": "assets/PubGmain.png",
+        "description": "In the game, up to one hundred players parachute onto an island where they scavenge for weapons and equipment to kill other players while avoiding getting killed themselves.",
+        "rating": "4.7/5",
+        "features": ["Third Person Shooter", "Survivor", "Battle Royale"],
+        "screenshots": [
+          "assets/PubGss1.png",
+          "assets/PubGss2.png",
+          "assets/PubGss3.png"
+        ],
+        "reviews": [
+          "Shankar: Favourite Game",
+          "Rahul: Great"
+        ]
+      }
+    };
+
+    // JavaScript to dynamically update the game details based on the selected game
+    document.addEventListener('DOMContentLoaded', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const gameId = urlParams.get('id');
+
+      if (gameId && games[gameId]) {
+        const game = games[gameId];
+        document.querySelector('h2').textContent = game.title;
+        document.querySelector('.game-details img').src = game.image;
+        document.querySelector('.game-details p').textContent = game.description;
+        document.querySelector('.game-details .btn').textContent = `Watch Streams for ${game.title}`;
+
+        const featuresList = document.querySelector('.game-features ul');
+        featuresList.innerHTML = '';
+        game.features.forEach(feature => {
+          const li = document.createElement('li');
+          li.textContent = feature;
+          featuresList.appendChild(li);
+        });
+
+        const screenshotsRow = document.querySelector('.game-screenshots .row');
+        screenshotsRow.innerHTML = '';
+        game.screenshots.forEach(screenshot => {
+          const col = document.createElement('div');
+          col.classList.add('col-md-4');
+          const img = document.createElement('img');
+          img.src = screenshot;
+          img.alt = `Screenshot of ${game.title}`;
+          img.classList.add('img-fluid');
+          img.width = 400;
+          img.height = 200;
+          col.appendChild(img);
+          screenshotsRow.appendChild(col);
+        });
+
+        const reviewsSection = document.querySelector('.game-reviews');
+        reviewsSection.innerHTML = '<h3>Reviews</h3>';
+        game.reviews.forEach(review => {
+          const reviewDiv = document.createElement('div');
+          reviewDiv.classList.add('review');
+          const p = document.createElement('p');
+          p.innerHTML = `<strong>${review.split(':')[0]}:</strong> ${review.split(':')[1]}`;
+          reviewDiv.appendChild(p);
+          reviewsSection.appendChild(reviewDiv);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
