@@ -1,0 +1,7 @@
+ProductID,Product Name,Category,Stock,Reorder Level,Price,Supplier
+201,Laptop,Electronics,50,20,1200,TechSupplies
+202,Mouse,Electronics,200,100,20,Accessories
+203,Bread,Groceries,150,50,1.5,FreshBake
+204,Milk,Groceries,100,30,2,DairyLand
+205,Monitor,Electronics,70,25,300,TechSupplies
+206,Cheese,Groceries,50,10,4.5,DairyLand

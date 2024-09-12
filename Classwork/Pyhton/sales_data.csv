@@ -1,0 +1,13 @@
+Product,Region,Salesperson,Units Sold,Unit Price,Month
+Laptop,North,John,30,1000,January
+Laptop,South,Emily,45,1000,January
+Monitor,North,Michael,20,300,January
+Monitor,South,Alice,25,300,January
+Mouse,East,Bob,200,25,January
+Keyboard,West,Susan,150,100,January
+Laptop,North,John,25,1000,February
+Laptop,South,Emily,35,1000,February
+Monitor,North,Michael,15,300,February
+Monitor,South,Alice,30,300,February
+Mouse,East,Bob,250,25,February
+Keyboard,West,Susan,120,100,February
