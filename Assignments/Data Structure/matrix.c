@@ -1,16 +1,3 @@
-// Create a C program to perform the following matrix manipulation operations on two
-// matrices A and B of size N x M.
-// 1. Row Sum Calculation:
-// Write a function to calculate and print the sum of all elements in each row of matrix A.
-// 2. Column Sum Calculation:
-// Write a function to calculate and print the sum of all elements in each column of matrix A.
-// 3. Matrix Addition:
-// Write a function to add matrices A and B. Print the resultant matrix.
-// 4. Matrix Subtraction:
-// Write a function to subtract matrix B from matrix A. Print the resultant matrix.
-// 5. Matrix Multiplication:
-// Write a function to multiply matrix A with matrix B. Validate the matrix dimensions to ensure multiplication is possible.
-
 #include <stdio.h>
 
 #define MAX 100
@@ -90,9 +77,26 @@ void matrixMultiplication(int A[MAX][MAX], int B[MAX][MAX], int rowsA, int colsA
     printMatrix(result, rowsA, colsB);
 }
 
+void findMinMax(int matrix[MAX][MAX], int rows, int cols, int* min, int* max) {
+    // Initialize min and max with the first element of the matrix
+    *min = *max = matrix[0][0];
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (matrix[i][j] < *min) {
+                *min = matrix[i][j];
+            }
+            if (matrix[i][j] > *max) {
+                *max = matrix[i][j];
+            }
+        }
+    }
+}
+
 int main() {
     int A[MAX][MAX], B[MAX][MAX];
     int rowsA, colsA, rowsB, colsB;
+    int choice, min, max;
 
     // Input matrix dimensions
     printf("Enter number of rows and columns for matrix A: ");
@@ -105,37 +109,70 @@ int main() {
     inputMatrix(A, rowsA, colsA, 'A');
     inputMatrix(B, rowsB, colsB, 'B');
 
-    // 1. Row Sum Calculation
-    printf("\nRow sums for matrix A:\n");
-    rowSum(A, rowsA, colsA);
+    do {
+        printf("\nMenu:\n");
+        printf("1. Row Sum of Matrix A\n");
+        printf("2. Column Sum of Matrix A\n");
+        printf("3. Matrix Addition (A + B)\n");
+        printf("4. Matrix Subtraction (A - B)\n");
+        printf("5. Matrix Multiplication (A * B)\n");
+        printf("6. Find Minimum and Maximum in Matrix A\n");
+        printf("7. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
 
-    // 2. Column Sum Calculation
-    printf("\nColumn sums for matrix A:\n");
-    columnSum(A, rowsA, colsA);
+        switch (choice) {
+            case 1:
+                printf("\nRow sums for matrix A:\n");
+                rowSum(A, rowsA, colsA);
+                break;
 
-    // 3. Matrix Addition (possible only if A and B have same dimensions)
-    if (rowsA == rowsB && colsA == colsB) {
-        printf("\nMatrix Addition (A + B):\n");
-        matrixAddition(A, B, rowsA, colsA);
-    } else {
-        printf("\nMatrix addition not possible: Dimensions do not match.\n");
-    }
+            case 2:
+                printf("\nColumn sums for matrix A:\n");
+                columnSum(A, rowsA, colsA);
+                break;
 
-    // 4. Matrix Subtraction (possible only if A and B have same dimensions)
-    if (rowsA == rowsB && colsA == colsB) {
-        printf("\nMatrix Subtraction (A - B):\n");
-        matrixSubtraction(A, B, rowsA, colsA);
-    } else {
-        printf("\nMatrix subtraction not possible: Dimensions do not match.\n");
-    }
+            case 3:
+                if (rowsA == rowsB && colsA == colsB) {
+                    printf("\nMatrix Addition (A + B):\n");
+                    matrixAddition(A, B, rowsA, colsA);
+                } else {
+                    printf("\nMatrix addition not possible: Dimensions do not match.\n");
+                }
+                break;
 
-    // 5. Matrix Multiplication (possible only if colsA == rowsB)
-    if (colsA == rowsB) {
-        printf("\nMatrix Multiplication (A * B):\n");
-        matrixMultiplication(A, B, rowsA, colsA, colsB);
-    } else {
-        printf("\nMatrix multiplication not possible: Invalid dimensions.\n");
-    }
+            case 4:
+                if (rowsA == rowsB && colsA == colsB) {
+                    printf("\nMatrix Subtraction (A - B):\n");
+                    matrixSubtraction(A, B, rowsA, colsA);
+                } else {
+                    printf("\nMatrix subtraction not possible: Dimensions do not match.\n");
+                }
+                break;
+
+            case 5:
+                if (colsA == rowsB) {
+                    printf("\nMatrix Multiplication (A * B):\n");
+                    matrixMultiplication(A, B, rowsA, colsA, colsB);
+                } else {
+                    printf("\nMatrix multiplication not possible: Invalid dimensions.\n");
+                }
+                break;
+
+            case 6:
+                findMinMax(A, rowsA, colsA, &min, &max);
+                printf("Minimum element in Matrix A: %d\n", min);
+                printf("Maximum element in Matrix A: %d\n", max);
+                break;
+
+            case 7:
+                printf("Exiting...\n");
+                break;
+
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    } while (choice != 7);
 
     return 0;
 }
