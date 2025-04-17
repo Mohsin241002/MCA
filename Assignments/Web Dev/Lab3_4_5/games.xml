@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<games xmlns="http://www.example.com/games">
+    <game currency="USD">
+        <id>1</id>
+        <name>Adventure Quest</name>
+        <type>RPG</type>
+        <releaseDate>2023-08-10</releaseDate>
+        <rating>4.7</rating>
+        <platform>PC</platform>
+        <developer>Epic Games</developer>
+        <price>59.99</price>
+    </game>
+    <game currency="USD">
+        <id>2</id>
+        <name>Speed Racer</name>
+        <type>Racing</type>
+        <releaseDate>2024-01-15</releaseDate>
+        <rating>4.5</rating>
+        <platform>Console</platform>
+        <developer>Speedworks</developer>
+        <price>39.99</price>
+    </game>
+</games>

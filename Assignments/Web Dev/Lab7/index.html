@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Library</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="nav-logo">Book Library</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+        </ul>
+        <div class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+        <div class="hero-section">
+            <h1 class="display-3">Welcome to our website</h1>
+            <p class="lead">Great variety of books at ur finger tips</p>
+            <button id="fetchbooks">Fetch Books</button>
+        </div>
+    <section class="search-section">
+        <input type="text" placeholder="Search book Name" id="search">
+        <select id="sorting">
+            <option value="asc">Name Ascending</option>
+            <option value="desc"> Name Descending</option>
+        </select>
+    </section>
+    <div id="books-container"></div>
+    <div id="pagination-container"></div>
+    <script src="script1.js"></script>
+</body>
+</html>

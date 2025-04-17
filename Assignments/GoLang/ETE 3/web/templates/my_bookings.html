@@ -1,0 +1,21 @@
+{{ define "content" }}
+<div class="row">
+    <div class="col-md-12">
+        <h1>My Bookings</h1>
+        <hr>
+    </div>
+</div>
+
+<div class="row" id="bookingsList">
+    <!-- Bookings will be loaded here via JavaScript -->
+    <div class="text-center py-5">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+{{ end }}
+
+{{ define "scripts" }}
+<script src="/static/js/my_bookings.js"></script>
+{{ end }} 

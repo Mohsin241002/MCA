@@ -1,0 +1,18 @@
+{
+    "games": [
+        {
+            "id": 101,
+            "title": "Spiderman",
+            "genre": "superhero",
+            "release_date": "2025-03-17T23:07:00Z",
+            "rating": 7,
+            "platforms": [
+                "psp",
+                "xbox",
+                "pc"
+            ],
+            "price": 45,
+            "is_multiplayer": true
+        }
+    ]
+}

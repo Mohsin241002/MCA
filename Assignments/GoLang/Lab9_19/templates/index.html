@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Info Fetcher - Concurrency Demo</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Game Info Fetcher</h1>
+            <p>Demonstrating Go Concurrency with Goroutines and Channels</p>
+        </header>
+
+        <main>
+            <!-- JSON Database Management Section -->
+            <section class="db-management">
+                <h2>Game Database Management</h2>
+                <div class="json-controls">
+                    <div class="json-import">
+                        <h3>Import Games from JSON</h3>
+                        <div class="file-input-container">
+                            <label for="jsonFile" class="btn btn-primary file-select-btn">Select and Import JSON File</label>
+                            <input type="file" id="jsonFile" name="jsonFile" accept=".json" required style="display: none;">
+                            <p class="file-format-hint">JSON format: array of game objects with required fields</p>
+                        </div>
+                        <div id="import-status" class="status-message"></div>
+                    </div>
+                    
+                    <div class="json-template">
+                        <h3>JSON Template</h3>
+                        <p>Use this format for your JSON file:</p>
+                        <pre>[
+  {
+    "title": "Elden Ring",
+    "genre": "Action RPG",
+    "publisher": "FromSoftware",
+    "releaseYear": 2022,
+    "rating": 9.5,
+    "price": 59.99,
+    "isMultiplayer": true
+  },
+  {
+    "title": "Cyberpunk 2077",
+    "genre": "RPG",
+    "publisher": "CD Projekt",
+    "releaseYear": 2020,
+    "rating": 7.2,
+    "price": 49.99,
+    "isMultiplayer": false
+  }
+]</pre>
+                        <p><a href="/sample_games.json" class="btn" download>Download Sample JSON</a></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Game Selection Controls -->
+            <section class="controls">
+                <h2>Select Games to Fetch</h2>
+                <form id="game-form">
+                    <div class="game-selector">
+                        <div class="checkboxes" id="game-checkboxes">
+                            <!-- Game checkboxes will be dynamically generated -->
+                        </div>
+                    </div>
+                    
+                    <div class="buttons">
+                        <button type="button" id="fetch-sequential" class="btn">Fetch Sequentially</button>
+                        <button type="button" id="fetch-concurrent" class="btn">Fetch Concurrently</button>
+                        <button type="button" id="fetch-leaky-buffers" class="btn btn-primary">Fetch with Leaky Buffers</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Live Goroutine Visualization Section -->
+            <section class="goroutine-visualization hidden" id="goroutine-visualization">
+                <h2>Live Goroutine Execution</h2>
+                <p class="visualization-explanation">
+                    This visualization demonstrates how Go executes tasks differently between sequential and concurrent processing. 
+                    Watch the goroutines (colored boxes) process games and send results through the channel to the main goroutine.
+                    <span class="sequential-note">In sequential mode, each task must complete before the next one starts.</span>
+                    <span class="concurrent-note">In concurrent mode, all tasks run simultaneously for maximum efficiency.</span>
+                </p>
+                <div class="visualization-container">
+                    <div class="goroutines-container" id="goroutines-container">
+                        <!-- Goroutines will be dynamically generated here -->
+                    </div>
+                    <div class="channel-container">
+                        <div class="channel" id="result-channel">
+                            <div class="channel-label">Result Channel</div>
+                            <div class="channel-buffer" id="channel-buffer">
+                                <!-- Channel buffer items will be added here -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main-goroutine">
+                        <div class="main-goroutine-label">Main Goroutine</div>
+                        <div class="main-results" id="main-results">
+                            <!-- Processed results will appear here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Leaky Buffer Visualization Section -->
+            <section class="leaky-buffer-visualization hidden" id="leaky-buffer-visualization">
+                <h2>Leaky Buffer Pool Demonstration</h2>
+                <p class="visualization-explanation">
+                    This visualization demonstrates how Go's leaky buffer pattern efficiently reuses memory.
+                    In scenarios with high throughput, creating and destroying buffers for each operation is expensive.
+                    <span class="buffer-note">Leaky buffers allow for memory reuse, reducing garbage collection overhead.</span>
+                </p>
+                
+                <div class="buffer-pool-container">
+                    <div class="buffer-pool-header">
+                        <h3>Buffer Pool (Channel-based)</h3>
+                        <div class="buffer-stats">
+                            <div class="stat-group">
+                                <span class="stat-label">Buffers Created:</span>
+                                <span class="stat-value" id="buffers-created">0</span>
+                            </div>
+                            <div class="stat-group">
+                                <span class="stat-label">Buffers Reused:</span>
+                                <span class="stat-value" id="buffers-reused">0</span>
+                            </div>
+                            <div class="stat-group">
+                                <span class="stat-label">Memory Saved:</span>
+                                <span class="stat-value" id="memory-saved">0 KB</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="buffer-pool">
+                        <!-- Buffer slots will be rendered here -->
+                        <div id="buffer-slots">
+                            <!-- Buffer slots get added dynamically -->
+                        </div>
+                    </div>
+                    
+                    <div class="buffer-operations">
+                        <div class="operation get-operation">
+                            <h4>Get Buffer</h4>
+                            <div class="goroutines-using-buffers" id="goroutines-using-buffers">
+                                <!-- Goroutines using buffers will be shown here -->
+                            </div>
+                        </div>
+                        
+                        <div class="operation put-operation">
+                            <h4>Put Buffer</h4>
+                            <div class="returned-buffers" id="returned-buffers">
+                                <!-- Returned buffers will be shown here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results display section - hidden until data is fetched -->
+            <section class="results hidden" id="results-section">
+                <div class="comparison">
+                    <div class="timing">
+                        <h3>Execution Time</h3>
+                        <!-- Shows total time taken to fetch all selected games -->
+                        <div id="timing-value" class="timer">0ms</div>
+                        <div id="timing-bar" class="progress-bar">
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                    <div class="fetch-type">
+                        <h3>Method</h3>
+                        <!-- Displays which method was used: Sequential or Concurrent -->
+                        <div id="fetch-method" class="method">Concurrent</div>
+                    </div>
+                </div>
+
+                <h3>Games Retrieved</h3>
+                <!-- Game cards will be dynamically inserted here by JavaScript -->
+                <div class="game-cards" id="game-results">
+                    <!-- Game cards will be inserted here dynamically -->
+                </div>
+            </section>
+
+            <!-- Explanation of Go concurrency concepts -->
+            <section class="concurrency-explained">
+                <h2>Understanding Go Concurrency</h2>
+                <div class="explanation">
+                    <div class="concept">
+                        <h3>Goroutines</h3>
+                        <p>Goroutines are lightweight threads managed by the Go runtime. They allow multiple functions to run concurrently on a single OS thread, making concurrent programming simple and efficient.</p>
+                        <p><strong>Implementation:</strong> In our code, each game fetch is executed in its own goroutine, created with the <code>go</code> keyword. This allows all game fetches to run simultaneously rather than waiting for each one to complete.</p>
+                    </div>
+                    <div class="concept">
+                        <h3>Channels</h3>
+                        <p>Channels are the pipes that connect concurrent goroutines. They allow goroutines to communicate with each other and synchronize their execution without explicit locks.</p>
+                        <p><strong>Implementation:</strong> Our code uses a channel (<code>resultsChan</code>) to collect results from multiple goroutines. Each goroutine sends its fetched game through this channel, and the main function reads from it.</p>
+                    </div>
+                    <div class="concept">
+                        <h3>Wait Groups</h3>
+                        <p>WaitGroups are used to wait for a collection of goroutines to finish their execution before proceeding. This ensures all concurrent tasks are completed.</p>
+                        <p><strong>Implementation:</strong> We use a <code>sync.WaitGroup</code> to track when all goroutines have finished. Each goroutine calls <code>wg.Done()</code> when complete, and a separate goroutine waits for all to finish before closing the channel.</p>
+                    </div>
+                </div>
+                <div class="visual">
+                    <div class="sequential-flow">
+                        <h3>Sequential Execution</h3>
+                        <p>In sequential execution, each game is fetched one after another. If each fetch takes 100ms, then fetching 8 games would take approximately 800ms total.</p>
+                        <div class="flow-diagram">
+                            <!-- Sequential flow visualization -->
+                            <div class="flow-item">Game 1</div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-item">Game 2</div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-item">Game 3</div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-item">...</div>
+                        </div>
+                    </div>
+                    <div class="concurrent-flow">
+                        <h3>Concurrent Execution</h3>
+                        <p>With concurrency, all games are fetched simultaneously. The total time is approximately equal to the slowest individual fetch (around 200-300ms), not the sum of all fetch times.</p>
+                        <div class="flow-diagram">
+                            <!-- Concurrent flow visualization -->
+                            <div class="parallel-items">
+                                <div class="flow-item">Game 1</div>
+                                <div class="flow-item">Game 2</div>
+                                <div class="flow-item">Game 3</div>
+                                <div class="flow-item">...</div>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-item wide">Results Channel</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Built with Go, Goroutines, and Channels</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html> 

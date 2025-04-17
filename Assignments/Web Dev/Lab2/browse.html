@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Games</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg custom-navbar">
+    <a class="navbar-brand" href="index.html">Gaming Website</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="browse.html">Browse</a></li>
+        <li class="nav-item"><a class="nav-link" href="details.html">Details</a></li>
+        <li class="nav-item"><a class="nav-link" href="apply.html">Apply</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="bro">
+    <section class="browse py-5">
+      <div class="container">
+        <h2 class="text-center">Browse Games</h2>
+        <div class="search-bar my-4">
+          <input type="text" id="searchInput" class="form-control" placeholder="Search for games..." onkeyup="searchGames()">
+        </div>
+        <div class="games-gallery d-flex flex-wrap" id="gamesGallery">
+          <div class="game-thumbnail" data-id="1">
+            <img src="assets/channels4_profile.jpg" alt="Game Thumbnail 1" width="200" height="200">
+            <p>Valorant</p>
+          </div>
+          <div class="game-thumbnail" data-id="2">
+            <img src="assets/channels4_profile (1).jpg" alt="Game Thumbnail 2" width="200" height="200">
+            <p>Fortnite</p>
+          </div>
+          <div class="game-thumbnail" data-id="3">
+            <img src="assets/download.png" alt="Game Thumbnail 3" width="200" height="200">
+            <p>PubG</p>
+          </div>
+          <!-- Add more game thumbnails as needed -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="text-center py-4">
+    <p>&copy; 2024 Gaming Website. All rights reserved.</p>
+  </footer>
+
+  <script src="js/search.js"></script>
+  <script>
+    // Function to make each game clickable and pass the game ID to the details page
+    function setupGameClickListeners() {
+      let gamesGallery = document.getElementById('gamesGallery');
+      let games = gamesGallery.getElementsByClassName('game-thumbnail');
+
+      for (let i = 0; i < games.length; i++) {
+        games[i].addEventListener('click', function() {
+          let gameId = this.getAttribute('data-id');
+          window.location.href = 'details.html?id=' + gameId;
+        });
+      }
+    }
+
+    // Initialize the click listeners
+    setupGameClickListeners();
+  </script>
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

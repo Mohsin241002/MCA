@@ -1,0 +1,101 @@
+game_id,title,price,genre,user_rating,release_year,developer_rating,playtime_hours,dlc_count,multiplayer_support,complexity_level,publisher,platform_support,recommended_age
+1,Elden Ring,59.99,Action RPG,9.2,2022,9.5,120.5,3,Yes,High,Bandai Namco,Windows/PS/Xbox,17+
+2,Minecraft,26.95,Sandbox,9,2011,9,500.2,12,Yes,Medium,Mojang,Multi-platform,10+
+3,Cyberpunk 2077,59.99,Action RPG,8.1,2020,7.5,85.3,2,No,High,CD Projekt,Windows/PS/Xbox,18+
+4,Stardew Valley,14.99,Simulation,9.3,2016,9.2,200.7,1,Yes,Low,ConcernedApe,Multi-platform,10+
+5,CS:GO,0,First-Person Shooter,8.5,2012,8.7,350.6,0,Yes,High,Valve,Windows,16+
+6,The Witcher 3,39.99,Action RPG,9.4,2015,9.6,180.2,16,No,High,CD Projekt,Multi-platform,18+
+7,Among Us,5,Multiplayer,8.2,2018,8,45.5,0,Yes,Low,InnerSloth,Multi-platform,10+
+8,Terraria,9.99,Sandbox,8.8,2011,9.1,300.4,5,Yes,Medium,Re-Logic,Multi-platform,10+
+9,Hades,24.99,Roguelike,9.5,2020,9.7,75.6,0,No,Medium,Supergiant Games,Windows/Switch,13+
+10,Civilization VI,59.99,Strategy,8.9,2016,8.6,250.3,6,Yes,High,2K Games,Multi-platform,12+
+11,Portal 2,9.99,Puzzle,9.1,2011,9.3,80.2,0,Yes,Medium,Valve,Windows/PS,12+
+12,Dead by Daylight,19.99,Multiplayer Horror,8,2016,7.8,120.5,25,Yes,Medium,Behaviour Interactive,Multi-platform,17+
+13,Factorio,30,Simulation,9.6,2020,9.8,200.1,0,Yes,High,Wube Software,Windows/Linux,12+
+14,No Man's Sky,59.99,Space Exploration,8.7,2016,8.5,150.4,10,Yes,High,Hello Games,Multi-platform,12+
+15,Rimworld,34.99,Colony Simulation,9.4,2018,9.5,250.6,3,No,High,Ludeon Studios,Windows/Mac,16+
+16,Rocket League,0,Sports,8.6,2015,8.4,180.3,50,Yes,Medium,Psyonix,Multi-platform,0+
+17,Valheim,19.99,Survival,9,2021,8.9,120.7,0,Yes,Medium,Iron Gate,Windows/Linux,13+
+18,Fall Guys,0,Battle Royale,8.3,2020,7.9,60.5,5,Yes,Low,Mediatonic,Multi-platform,10+
+19,Phasmophobia,13.99,Co-op Horror,8.5,2020,8.2,75.4,0,Yes,Medium,Kinetic Games,Windows,16+
+20,Rust,39.99,Survival,8.4,2013,8.1,200.8,0,Yes,High,Facepunch Studios,Windows/Mac,17+
+21,Red Dead Redemption 2,59.99,Action Adventure,9.3,2019,9.5,150.6,2,No,High,Rockstar Games,Windows/PS/Xbox,18+
+22,Rainbow Six Siege,19.99,Tactical Shooter,8.7,2015,8.5,120.3,50,Yes,High,Ubisoft,Multi-platform,17+
+23,DOTA 2,0,MOBA,8.9,2013,8.8,300.2,0,Yes,High,Valve,Windows/Mac/Linux,13+
+24,Nier: Automata,39.99,Action RPG,9.2,2017,9.4,90.5,1,No,Medium,Square Enix,Windows/PS,17+
+25,Subnautica,29.99,Survival,9,2018,8.7,80.4,0,No,Medium,Unknown Worlds,Multi-platform,12+
+26,Apex Legends,0,Battle Royale,8.5,2019,8.3,120.7,10,Yes,Medium,Respawn Entertainment,Multi-platform,16+
+27,Total War: Warhammer III,59.99,Strategy,8.8,2022,8.6,200.5,5,Yes,High,Creative Assembly,Windows,16+
+28,Sea of Thieves,39.99,Multiplayer Adventure,8.6,2018,8.4,100.2,15,Yes,Medium,Rare,Windows/Xbox,12+
+29,Risk of Rain 2,29.99,Roguelike,9.1,2020,8.9,75.3,2,Yes,Medium,Hopoo Games,Multi-platform,10+
+30,Satisfactory,29.99,Factory Simulation,9.3,2019,9,150.6,0,Yes,High,Coffee Stain Studios,Windows,12+
+31,Doom Eternal,59.99,First-Person Shooter,9,2020,8.7,70.5,5,Yes,High,Bethesda,Multi-platform,18+
+32,Stellaris,39.99,Grand Strategy,8.7,2016,8.5,250.4,10,Yes,High,Paradox Interactive,Windows/Mac,12+
+33,Deep Rock Galactic,29.99,Co-op Shooter,9.2,2020,9,100.3,5,Yes,Medium,Ghost Ship Games,Multi-platform,13+
+34,Darkest Dungeon,24.99,Roguelike RPG,9,2016,8.8,80.2,2,No,High,Red Hook Studios,Multi-platform,16+
+35,Cities: Skylines,29.99,City Building,8.9,2015,8.6,200.1,25,No,High,Paradox Interactive,Multi-platform,10+
+36,The Forest,19.99,Survival Horror,8.5,2018,8.3,90.4,0,Yes,High,Endnight Games,Windows/PS,18+
+37,Disco Elysium,39.99,RPG,9.4,2019,9.5,60.7,1,No,High,ZA/UM,Multi-platform,18+
+38,Overwatch,0,Team Shooter,8.6,2016,8.4,120.5,50,Yes,Medium,Blizzard,Multi-platform,12+
+39,Kerbal Space Program,39.99,Space Simulation,9.1,2015,9,150.3,5,No,High,Squad,Multi-platform,10+
+40,Dead Space Remake,59.99,Sci-Fi Horror,8.8,2023,8.6,40.2,0,No,High,EA Motive,Windows/PS/Xbox,18+
+41,Halo: The Master Chief Collection,39.99,First-Person Shooter,9,2019,8.7,200.6,6,Yes,High,343 Industries,Windows/Xbox,16+
+42,ARK: Survival Evolved,29.99,Survival,8.4,2017,7.9,250.8,50,Yes,High,Studio Wildcard,Multi-platform,16+
+43,Crusader Kings III,49.99,Grand Strategy,9,2020,8.8,180.5,3,Yes,High,Paradox Interactive,Windows/Mac,16+
+44,Borderlands 3,59.99,First-Person Shooter,8.5,2019,8.2,100.4,4,Yes,High,2K Games,Multi-platform,17+
+45,Divinity: Original Sin 2,44.99,RPG,9.3,2017,9.4,120.6,2,Yes,High,Larian Studios,Multi-platform,16+
+46,Ghost of Tsushima,59.99,Action Adventure,9.2,2020,9.3,80.5,1,Yes,High,Sucker Punch,PS,17+
+47,Kenshi,29.99,RPG,8.7,2018,8.5,200.7,0,No,High,Lo-Fi Games,Windows,16+
+48,Warframe,0,Shooter,8.6,2013,8.4,300.2,50,Yes,Medium,Digital Extremes,Multi-platform,13+
+49,Oxygen Not Included,29.99,Colony Simulation,9.1,2019,9,150.4,2,No,High,Klei Entertainment,Windows/Mac,10+
+50,Resident Evil Village,59.99,Survival Horror,8.9,2021,8.7,60.3,2,No,High,Capcom,Multi-platform,18+
+51,For Honor,29.99,Action Fighting,8.3,2017,8,100.5,25,Yes,High,Ubisoft,Multi-platform,16+
+52,Euro Truck Simulator 2,19.99,Simulation,8.8,2012,8.5,250.6,50,No,Medium,SCS Software,Windows/Mac/Linux,3+
+53,Brawlhalla,0,Fighting,8.4,2017,8.2,80.4,10,Yes,Medium,Blue Mammoth Games,Multi-platform,10+
+54,Control,39.99,Action Adventure,9,2019,8.8,50.2,2,No,High,505 Games,Multi-platform,16+
+55,Prey,29.99,Sci-Fi Shooter,8.6,2017,8.4,70.5,1,No,High,Bethesda,Windows/PS/Xbox,18+
+56,Dragon Quest XI,59.99,JRPG,9.1,2017,9.2,120.7,1,No,Medium,Square Enix,Multi-platform,12+
+57,Grounded,29.99,Survival,8.7,2022,8.5,60.3,0,Yes,Medium,Obsidian Entertainment,Windows/Xbox,12+
+58,FIFA 23,59.99,Sports,8.2,2022,7.9,100.6,10,Yes,Medium,EA Sports,Multi-platform,3+
+59,Total War: Three Kingdoms,59.99,Strategy,8.7,2019,8.5,200.4,3,Yes,High,Creative Assembly,Windows,16+
+60,Metro Exodus,39.99,First-Person Shooter,8.9,2019,8.6,70.2,3,No,High,Deep Silver,Multi-platform,18+
+61,The Long Dark,24.99,Survival,9,2017,8.8,90.5,2,No,High,Hinterland Studio,Multi-platform,16+
+62,Hitman 3,59.99,Stealth,9.1,2021,8.9,60.4,5,No,High,IO Interactive,Multi-platform,17+
+63,Death Stranding,59.99,Action Adventure,8.8,2020,8.6,80.7,1,No,High,505 Games,Windows/PS,18+
+64,Planet Zoo,49.99,Simulation,8.9,2019,8.7,150.3,10,No,High,Frontier Developments,Windows,10+
+65,Unexplored 2,29.99,RPG,8.5,2022,8.3,50.6,0,No,Medium,Ludomotion,Windows,12+
+66,Golf With Your Friends,19.99,Sports,8,2020,7.8,40.2,5,Yes,Low,Blacklight Interactive,Multi-platform,3+
+67,Moonlighter,19.99,Action RPG,8.7,2018,8.5,60.3,1,No,Medium,Digital Sun,Multi-platform,10+
+68,Wolfenstein II,39.99,First-Person Shooter,8.6,2017,8.4,50.5,3,No,High,Bethesda,Multi-platform,18+
+69,Slay the Spire,24.99,Card Strategy,9.3,2019,9.1,100.4,0,No,Medium,MegaCrit Games,Multi-platform,10+
+70,Tabletop Simulator,19.99,Board Game,8.5,2015,8.3,80.6,50,Yes,Medium,Berserk Games,Windows/Mac,10+
+71,Frostpunk,29.99,City Building,9,2018,8.8,70.5,3,No,High,11 bit studios,Windows/Mac,16+
+72,Grim Dawn,24.99,Action RPG,8.8,2016,8.6,120.3,2,Yes,High,Crate Entertainment,Windows,16+
+73,Outer Worlds,59.99,RPG,8.7,2019,8.5,60.4,2,No,High,Private Division,Multi-platform,17+
+74,Cuphead,19.99,Platformer,9.2,2017,9,50.2,1,Yes,High,Studio MDHR,Multi-platform,10+
+75,Dark Souls III,39.99,Action RPG,9,2016,8.8,100.5,3,No,High,FromSoftware,Multi-platform,16+
+76,Civilization V,29.99,Strategy,8.8,2010,8.6,250.7,10,Yes,High,2K Games,Windows/Mac,12+
+77,XCOM 2,39.99,Tactical Strategy,9,2016,8.7,120.4,4,Yes,High,2K Games,Multi-platform,16+
+78,Monster Hunter: World,39.99,Action RPG,8.9,2018,8.7,200.6,5,Yes,High,Capcom,Multi-platform,16+
+79,Rise of the Tomb Raider,29.99,Action Adventure,8.7,2016,8.5,70.3,2,No,High,Square Enix,Multi-platform,16+
+80,Subnautica: Below Zero,29.99,Survival,8.6,2021,8.4,60.5,0,No,Medium,Unknown Worlds,Multi-platform,12+
+81,Garry's Mod,9.99,Sandbox,8.5,2006,8.3,300.8,0,Yes,Medium,Facepunch Studios,Windows/Mac/Linux,10+
+82,Skyrim Special Edition,39.99,RPG,8.8,2016,8.6,250.5,4,No,High,Bethesda,Multi-platform,17+
+83,Little Nightmares,19.99,Puzzle Platformer,8.9,2017,8.7,40.2,2,No,Medium,Bandai Namco,Multi-platform,12+
+84,Slime Rancher,19.99,Simulation,8.7,2017,8.5,75.2,1,No,Low,Monomi Park,Multi-platform,10+
+85,Marvel's Spider-Man,59.99,Action Adventure,9.1,2022,9.3,50.6,1,No,Medium,Insomniac Games,PS/Windows,13+
+86,Microsoft Flight Simulator,59.99,Simulation,9.2,2020,9.5,200.4,10,No,High,Asobo Studio,Windows/Xbox,0+
+87,Halo Infinite,0,First-Person Shooter,8.5,2021,8.3,120.5,2,Yes,Medium,343 Industries,Windows/Xbox,16+
+88,Forza Horizon 5,59.99,Racing,9,2021,9.2,150.7,5,Yes,Medium,Playground Games,Windows/Xbox,0+
+89,Final Fantasy XIV,19.99,MMORPG,9.3,2013,9.5,500.6,10,Yes,High,Square Enix,Windows/Mac,13+
+90,Stardew Valley Expanded,14.99,Simulation,9.4,2016,9.3,250.8,0,Yes,Low,ConcernedApe,Multi-platform,10+
+91,It Takes Two,39.99,Co-op Adventure,9.3,2021,9.5,25.6,0,Yes,Medium,Hazelight Studios,Multi-platform,12+
+92,Escape from Tarkov,44.99,Tactical Shooter,8.9,2017,8.7,200.3,0,Yes,High,Battlestate Games,Windows,18+
+93,Snowrunner,39.99,Simulation,8.8,2020,8.6,150.5,5,Yes,High,Saber Interactive,Multi-platform,12+
+94,Baldur's Gate 3,59.99,RPG,9.6,2023,9.7,120.4,0,Yes,High,Larian Studios,Windows/PS,16+
+95,Dota Underlords,0,Auto Battler,8.4,2019,8.2,80.7,0,Yes,Medium,Valve,Windows/Mac/Linux,10+
+96,Persona 4 Golden,19.99,JRPG,9.2,2020,9.3,100.6,0,No,High,Atlus,Windows,16+
+97,Elite Dangerous,29.99,Space Simulation,8.7,2014,8.5,250.2,10,Yes,High,Frontier Developments,Windows/Mac/Xbox,10+
+98,Star Wars Jedi: Fallen Order,39.99,Action Adventure,9,2019,8.8,40.5,1,No,Medium,Electronic Arts,Multi-platform,16+
+99,Volheim,19.99,Viking Survival,8.9,2021,8.7,90.3,0,Yes,Medium,Iron Gate,Windows/Linux,13+
+100,For the King,24.99,Roguelike Strategy,8.6,2018,8.4,75.5,2,Yes,Medium,IronOak Games,Multi-platform,10+

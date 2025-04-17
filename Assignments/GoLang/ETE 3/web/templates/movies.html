@@ -1,0 +1,39 @@
+{{ define "content" }}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Movies</h1>
+        <hr>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <form id="searchForm" class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search by title" id="searchTitle">
+            <select class="form-select me-2" id="filterGenre">
+                <option value="">All Genres</option>
+                <option value="Action">Action</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Drama">Drama</option>
+                <option value="Horror">Horror</option>
+                <option value="Sci-Fi">Sci-Fi</option>
+                <option value="Thriller">Thriller</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div>
+</div>
+
+<div class="row" id="moviesList">
+    <!-- Movies will be loaded here via JavaScript -->
+    <div class="text-center py-5">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+{{ end }}
+
+{{ define "scripts" }}
+<script src="/static/js/movies.js"></script>
+{{ end }} 

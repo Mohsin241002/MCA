@@ -1,0 +1,29 @@
+Playlist
+Create a program that implements a playlist of songs.
+to start off, implement the following classes .
+
+1.Album 
+it has three fields, two strings called name and artist and an arraylist that holds objects of type Songs called songs.
+- A constructor that accepts two strings (name of the album and artist). It initiates the fields and instantiates songs.
+- And three methods, they are:
+    -addsong(), has tow paramenters of type string(titleof song), double(duration of song) and returns a boolean. Returns true if the song was added successfully or false otherwise.
+    -findsong() has one parameter of type string(title of song) and returns a song. Returns the song if it exist, null if it doesnt exist.
+    -addToPlayList() has two paramenters of type int(track number of song in album) and LinkedlIst (the playlist) that holds objects of type Song and returns a boolean. Returns true if it exists and it was added successfully using the track number or false otherwise.
+
+2.Song
+-It has two fields, s sting called title and a double called duration.
+- A constructor that accepts a string (title of the song) and a double (duration of the song ). It initialises the tile and duration
+- And two methods, they are:
+    -getTitle(), getter for title.
+    -toString() songs overriding toString method. returns a String in the following format: "title: Duration"
+
+TIP: In Album, use the findsong() method in addSong() and addToPlayList(string, Linkedlist) to check if a song exist before proceeding.
+TIP: BE extremely careful with the spelling of the names of the fields, constructors and methods.
+TIP: be extremely careful about spaces and spelling in the returned string from the toSting() method.
+
+NOTE: All fields are Private.
+NOTE: All constructors are public.
+NOTE: All methods are public(except for findSong() which is private)
+NOTE: There are no static members.
+NOTE: Classes that are not in the java.lang package should be manually imported.
+NOTE: If you get and error from the 

@@ -1,0 +1,11 @@
+EmployeeID,Name,Department,Days Present,Days Absent,Month
+101,John,Sales,20,2,January
+102,Susan,HR,18,4,January
+103,Emily,Sales,22,0,January
+104,Michael,IT,21,1,January
+105,Alice,HR,19,3,January
+101,John,Sales,19,3,February
+102,Susan,HR,20,2,February
+103,Emily,Sales,20,2,February
+104,Michael,IT,21,1,February
+105,Alice,HR,18,4,February

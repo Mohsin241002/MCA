@@ -1,0 +1,4 @@
+read -p "Enter the base" base
+read -p "enter the exponent: " exponent
+result=$(echo "$base ^ $exponent" | bc)
+echo "$base raised to power of $exponent is $result."

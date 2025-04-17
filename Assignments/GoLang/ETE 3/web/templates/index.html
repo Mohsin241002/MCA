@@ -1,0 +1,33 @@
+{{ define "content" }}
+<div class="row">
+    <div class="col-md-12">
+        <div class="jumbotron p-5 bg-light rounded">
+            <h1 class="display-4">Welcome to Cinema Booking</h1>
+            <p class="lead">Book your favorite movies with ease!</p>
+            <hr class="my-4">
+            <p>Choose from the latest releases and book your seats online.</p>
+            <a class="btn btn-primary btn-lg" href="/movies" role="button">Browse Movies</a>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-12">
+        <h2>Currently Showing</h2>
+        <hr>
+    </div>
+</div>
+
+<div class="row" id="featuredMovies">
+    <!-- Movies will be loaded here via JavaScript -->
+    <div class="text-center py-5">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+{{ end }}
+
+{{ define "scripts" }}
+<script src="/static/js/index.js"></script>
+{{ end }} 

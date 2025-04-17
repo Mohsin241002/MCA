@@ -1,0 +1,25 @@
+{{ define "content" }}
+<div class="row" id="movieDetail">
+    <!-- Movie details will be loaded here via JavaScript -->
+    <div class="text-center py-5">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <h2>Showtimes</h2>
+        <hr>
+    </div>
+</div>
+
+<div class="row" id="showtimesList">
+    <!-- Showtimes will be loaded here via JavaScript -->
+</div>
+{{ end }}
+
+{{ define "scripts" }}
+<script src="/static/js/movie_detail.js"></script>
+{{ end }} 

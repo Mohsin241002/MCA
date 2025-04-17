@@ -1,0 +1,153 @@
+/* General Styles */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto;
+}
+
+/* Movie Card Styles */
+.movie-card {
+    transition: transform 0.3s;
+    height: 100%;
+}
+
+.movie-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.movie-poster {
+    height: 350px;
+    object-fit: cover;
+}
+
+.movie-info {
+    padding: 15px;
+}
+
+/* Seat Booking Styles */
+.screen-container {
+    margin-bottom: 30px;
+}
+
+.screen {
+    background-color: #ccc;
+    height: 30px;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.seat-map {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.seat-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.row-label {
+    width: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.seat {
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+}
+
+.seat.available {
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+}
+
+.seat.available:hover {
+    background-color: #d0d0d0;
+}
+
+.seat.selected {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #388E3C;
+}
+
+.seat.booked {
+    background-color: #f44336;
+    color: white;
+    border: 1px solid #d32f2f;
+    cursor: not-allowed;
+}
+
+.seat-legend {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin: 0 15px;
+}
+
+.legend-item .seat {
+    cursor: default;
+    margin-right: 5px;
+    width: 25px;
+    height: 25px;
+}
+
+/* Date Picker Styles */
+.date-picker {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.date-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    min-width: 80px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.date-item:hover, .date-item.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #0056b3;
+}
+
+.date-day {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.date-date {
+    font-size: 0.9rem;
+} 

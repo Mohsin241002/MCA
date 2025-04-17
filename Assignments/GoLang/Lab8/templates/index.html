@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Information System</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-gamepad"></i> Gaming Information System</h1>
+            <nav>
+                <button onclick="showAddGameForm()" class="btn-primary">
+                    <i class="fas fa-plus"></i> Add New Game
+                </button>
+                <button onclick="showSaveModal()" class="btn-success">
+                    <i class="fas fa-save"></i> Save Library
+                </button>
+                <button onclick="showLoadModal()" class="btn-info">
+                    <i class="fas fa-folder-open"></i> Load Library
+                </button>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Landing Page Section -->
+            <section id="landing" class="landing-section">
+                <div class="welcome-card">
+                    <div class="welcome-header">
+                        <h2><i class="fas fa-info-circle"></i> Welcome to the Gaming Information System</h2>
+                    </div>
+                    <div class="welcome-content">
+                        <p>This system allows you to manage your game collection with the following features:</p>
+                        <ul>
+                            <li><i class="fas fa-plus-circle"></i> <strong>Add games</strong> to your collection with details like title, genre, price, and platforms</li>
+                            <li><i class="fas fa-save"></i> <strong>Save your library</strong> to a JSON file for future access</li>
+                            <li><i class="fas fa-folder-open"></i> <strong>Load game libraries</strong> from previously saved files</li>
+                            <li><i class="fas fa-trash"></i> <strong>Remove games</strong> you no longer want to track</li>
+                        </ul>
+                        <p>To get started, click the "Add New Game" button to add your first game, or load an existing library.</p>
+                        <div class="stat-counters">
+                            <div class="stat-counter">
+                                <span id="gameCount" class="counter">0</span>
+                                <span class="counter-label">Games</span>
+                            </div>
+                        </div>
+                        <button onclick="hideLanding()" class="btn-get-started">
+                            <i class="fas fa-arrow-right"></i> Get Started
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <div id="gameList" class="game-list">
+                <!-- Games will be displayed here -->
+            </div>
+
+            <!-- Add Game Modal -->
+            <div id="addGameForm" class="modal">
+                <div class="modal-content glass-effect">
+                    <div class="modal-header">
+                        <h2><i class="fas fa-plus-circle"></i> Add New Game</h2>
+                        <button class="close-btn" onclick="hideAddGameForm()">&times;</button>
+                    </div>
+                    <form id="gameForm" class="modal-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="id">Game ID:</label>
+                                <input type="number" id="id" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Title:</label>
+                                <input type="text" id="title" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="genre">Genre:</label>
+                                <input type="text" id="genre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="rating">Rating (0-10):</label>
+                                <input type="number" id="rating" min="0" max="10" step="0.1" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="releaseDate">Release Date:</label>
+                                <input type="date" id="releaseDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="releaseTime">Release Time:</label>
+                                <input type="time" id="releaseTime" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="platforms">Platforms (comma-separated):</label>
+                            <input type="text" id="platforms" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="price">Price:</label>
+                                <input type="number" id="price" min="0" step="0.01" required>
+                            </div>
+                            <div class="form-group checkbox-group">
+                                <label for="isMultiplayer">
+                                    <input type="checkbox" id="isMultiplayer">
+                                    Multiplayer
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">Add Game</button>
+                            <button type="button" class="btn-secondary" onclick="hideAddGameForm()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Save Modal -->
+            <div id="saveModal" class="modal">
+                <div class="modal-content glass-effect">
+                    <div class="modal-header">
+                        <h2><i class="fas fa-save"></i> Save Game Library</h2>
+                        <button class="close-btn" onclick="hideSaveModal()">&times;</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="saveFilename">Filename:</label>
+                        <input type="text" id="saveFilename" value="games.json" required>
+                    </div>
+                    <div class="form-actions">
+                        <button onclick="saveGames()" class="btn-success">Save</button>
+                        <button onclick="hideSaveModal()" class="btn-secondary">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load Modal -->
+            <div id="loadModal" class="modal">
+                <div class="modal-content glass-effect">
+                    <div class="modal-header">
+                        <h2><i class="fas fa-folder-open"></i> Load Game Library</h2>
+                        <button class="close-btn" onclick="hideLoadModal()">&times;</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="loadFilename">Filename:</label>
+                        <input type="text" id="loadFilename" value="games.json" required>
+                    </div>
+                    <div class="form-actions">
+                        <button onclick="loadGames()" class="btn-info">Load</button>
+                        <button onclick="hideLoadModal()" class="btn-secondary">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No Games Message -->
+            <div id="noGamesMessage" class="no-games-message" style="display: none;">
+                <i class="fas fa-info-circle"></i>
+                <p>No games in your library yet. Click "Add New Game" to get started!</p>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2023 Gaming Information System - Built with Go, HTML, CSS, and JavaScript</p>
+        </footer>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notification" class="notification"></div>
+
+    <script>
+        // Edit only the document ready event handler
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("Document loaded, initializing application...");
+            
+            // Try to load from default file first
+            const defaultFile = "games.json";
+            
+            console.log("Attempting to load default games file:", defaultFile);
+            
+            fetch(`/api/games/load?filename=${defaultFile}`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Cache-Control': 'no-cache'
+                },
+                credentials: 'same-origin'
+            })
+            .then(response => {
+                console.log("Initial load response:", response.status, response.statusText);
+                console.log("Response headers:", [...response.headers.entries()]);
+                
+                if (!response.ok) {
+                    console.warn("Could not load default games file, falling back to API");
+                    throw new Error(`Failed to load default file (${response.status})`);
+                }
+                
+                const contentType = response.headers.get('content-type');
+                if (!contentType || !contentType.includes('application/json')) {
+                    console.warn("Invalid content type:", contentType);
+                    throw new Error("Invalid content type");
+                }
+                
+                return response.json();
+            })
+            .then(data => {
+                console.log("Initial load data:", data);
+                
+                if (Array.isArray(data)) {
+                    console.log(`Loaded ${data.length} games from default file`);
+                    updateGameList(data);
+                } else if (data && data.games && Array.isArray(data.games)) {
+                    console.log(`Loaded ${data.games.length} games from library object`);
+                    updateGameList(data.games);
+                } else {
+                    console.warn("Response was not an array of games:", data);
+                    updateGameList([]);
+                }
+            })
+            .catch(error => {
+                console.error("Error during initialization:", error);
+                // Fall back to regular fetch
+                fetchGames();
+            });
+        });
+
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        function fetchGames() {
+            // Log that we're fetching games
+            console.log("Fetching games from API...");
+            
+            fetch('/api/games')
+                .then(response => {
+                    console.log("API response received:", response.status);
+                    if (!response.ok) throw new Error('Failed to fetch games');
+                    return response.json();
+                })
+                .then(games => {
+                    console.log("Fetched games:", games);
+                    updateGameList(games);
+                })
+                .catch(error => {
+                    console.error('Error fetching games:', error);
+                    showNotification('Failed to fetch games: ' + error.message, 'error');
+                });
+        }
+
+        function updateGameList(games) {
+            const gameList = document.getElementById('gameList');
+            const noGamesMessage = document.getElementById('noGamesMessage');
+            const gameCount = document.getElementById('gameCount');
+            
+            // Update game counter
+            gameCount.textContent = games.length;
+            
+            gameList.innerHTML = '';
+            
+            if (games.length === 0) {
+                noGamesMessage.style.display = 'block';
+            } else {
+                noGamesMessage.style.display = 'none';
+                games.forEach(game => {
+                    const gameCard = createGameCard(game);
+                    gameList.appendChild(gameCard);
+                });
+            }
+        }
+
+        function loadGames() {
+            const filename = document.getElementById('loadFilename').value;
+            console.log("Loading games from file:", filename);
+            
+            // Make sure we have a valid filename
+            if (!filename || filename.trim() === '') {
+                showNotification('Please enter a valid filename', 'error');
+                return;
+            }
+            
+            // Show loading notification
+            showNotification('Loading games...', 'info');
+            
+            // Use correct endpoint format and method
+            fetch(`/api/games/load?filename=${encodeURIComponent(filename)}`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Cache-Control': 'no-cache'
+                }
+            })
+            .then(response => {
+                console.log("Load response status:", response.status, response.statusText);
+                console.log("Response headers:", [...response.headers.entries()]);
+                
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        throw new Error(text || `Failed to load games (${response.status})`);
+                    });
+                }
+                
+                return response.json();
+            })
+            .then(data => {
+                console.log("Load response data:", data);
+                
+                // Handle library format (with games property) or direct array
+                let games = data;
+                if (!Array.isArray(data) && data.games && Array.isArray(data.games)) {
+                    console.log("Data is in library format, extracting games array");
+                    games = data.games;
+                }
+                
+                if (!Array.isArray(games)) {
+                    console.error("Invalid data format, expected array:", data);
+                    games = [];
+                }
+                
+                updateGameList(games);
+                hideLoadModal();
+                showNotification(`Loaded ${games.length} games successfully!`);
+                hideLanding();
+            })
+            .catch(error => {
+                console.error("Load games error:", error);
+                showNotification('Error loading games: ' + error.message, 'error');
+            });
+        }
+
+        function createGameCard(game) {
+            // Format release date for display
+            let releaseDate = 'Unknown';
+            if (game.release_date) {
+                const date = new Date(game.release_date);
+                if (!isNaN(date)) {
+                    releaseDate = date.toLocaleDateString(undefined, { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                }
+            }
+            
+            const card = document.createElement('div');
+            card.className = 'game-card glass-effect';
+            card.innerHTML = `
+                <div class="game-header">
+                    <h3>${game.title}</h3>
+                    <span class="rating">${game.rating}/10</span>
+                </div>
+                <div class="game-details">
+                    <p><i class="fas fa-id-card"></i> ID: ${game.id}</p>
+                    <p><i class="fas fa-gamepad"></i> Genre: ${game.genre}</p>
+                    <p><i class="fas fa-calendar-alt"></i> Released: ${releaseDate}</p>
+                    <p><i class="fas fa-dollar-sign"></i> Price: $${game.price.toFixed(2)}</p>
+                    <p><i class="fas fa-desktop"></i> Platforms: ${game.platforms.join(', ')}</p>
+                    <p><i class="fas fa-users"></i> Multiplayer: ${game.is_multiplayer ? 'Yes' : 'No'}</p>
+                </div>
+                <button onclick="deleteGame(${game.id})" class="delete-btn">
+                    <i class="fas fa-trash"></i> Delete
+                </button>
+            `;
+            return card;
+        }
+
+        function hideLanding() {
+            document.getElementById('landing').style.display = 'none';
+        }
+
+        function showAddGameForm() {
+            document.getElementById('addGameForm').style.display = 'flex';
+            
+            // Set default release date and time to current date/time
+            const now = new Date();
+            
+            // Format date as YYYY-MM-DD for the date input
+            const dateString = now.toISOString().split('T')[0];
+            document.getElementById('releaseDate').value = dateString;
+            
+            // Format time as HH:MM for the time input
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('releaseTime').value = `${hours}:${minutes}`;
+            
+            hideLanding();
+        }
+
+        function hideAddGameForm() {
+            document.getElementById('addGameForm').style.display = 'none';
+        }
+
+        function showSaveModal() {
+            document.getElementById('saveModal').style.display = 'flex';
+        }
+
+        function hideSaveModal() {
+            document.getElementById('saveModal').style.display = 'none';
+        }
+
+        function showLoadModal() {
+            document.getElementById('loadModal').style.display = 'flex';
+        }
+
+        function hideLoadModal() {
+            document.getElementById('loadModal').style.display = 'none';
+        }
+
+        document.getElementById('gameForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get date and time values
+            const releaseDateValue = document.getElementById('releaseDate').value;
+            const releaseTimeValue = document.getElementById('releaseTime').value || '00:00';
+            
+            // Create a Date object from the inputs
+            const releaseDate = new Date(`${releaseDateValue}T${releaseTimeValue}`);
+            
+            const game = {
+                id: parseInt(document.getElementById('id').value),
+                title: document.getElementById('title').value,
+                genre: document.getElementById('genre').value,
+                release_date: releaseDate.toISOString(), // Format as ISO string for Go time.Time
+                rating: parseFloat(document.getElementById('rating').value),
+                platforms: document.getElementById('platforms').value.split(',').map(p => p.trim()),
+                price: parseFloat(document.getElementById('price').value),
+                is_multiplayer: document.getElementById('isMultiplayer').checked
+            };
+
+            fetch('/api/games/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(game)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    if (response.status === 400) {
+                        return response.text().then(text => {
+                            throw new Error(text);
+                        });
+                    }
+                    throw new Error('Failed to add game');
+                }
+                return response.json();
+            })
+            .then(() => {
+                hideAddGameForm();
+                fetchGames();
+                this.reset();
+                showNotification('Game added successfully!');
+                hideLanding();
+            })
+            .catch(error => {
+                showNotification(error.message, 'error');
+            });
+        });
+
+        function deleteGame(id) {
+            if (confirm('Are you sure you want to delete this game?')) {
+                fetch(`/api/games/delete?id=${id}`, {
+                    method: 'DELETE'
+                })
+                .then(response => {
+                    if (!response.ok) throw new Error('Failed to delete game');
+                    return response.json();
+                })
+                .then(() => {
+                    fetchGames();
+                    showNotification('Game deleted successfully!');
+                })
+                .catch(error => {
+                    showNotification(error.message, 'error');
+                });
+            }
+        }
+
+        function saveGames() {
+            const filename = document.getElementById('saveFilename').value;
+            console.log("Saving games to file:", filename);
+            
+            if (!filename || filename.trim() === '') {
+                showNotification('Please enter a valid filename', 'error');
+                return;
+            }
+            
+            showNotification('Saving games...', 'info');
+            
+            fetch(`/api/games/save?filename=${encodeURIComponent(filename)}`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({filename: filename})
+            })
+            .then(response => {
+                console.log("Save response status:", response.status, response.statusText);
+                
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        throw new Error(text || `Failed to save games (${response.status})`);
+                    });
+                }
+                
+                return response.json();
+            })
+            .then(data => {
+                console.log("Save response:", data);
+                hideSaveModal();
+                showNotification(data.message || 'Games saved successfully!');
+            })
+            .catch(error => {
+                console.error("Save games error:", error);
+                showNotification('Error saving games: ' + error.message, 'error');
+            });
+        }
+    </script>
+</body>
+</html> 

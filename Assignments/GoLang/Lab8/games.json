@@ -1,0 +1,41 @@
+{
+    "games": [
+        {
+            "id": 323,
+            "title": "fdsf",
+            "genre": "efes",
+            "release_date": "2025-03-26T21:56:57.4715563+05:30",
+            "rating": 3,
+            "platforms": [
+                "dfsf",
+                "dfsdf"
+            ],
+            "price": 34,
+            "is_multiplayer": true
+        },
+        {
+            "id": 565,
+            "title": "rgddg",
+            "genre": "ghfh",
+            "release_date": "2025-03-26T21:57:18.5363172+05:30",
+            "rating": 7,
+            "platforms": [
+                "rgreg"
+            ],
+            "price": 54,
+            "is_multiplayer": false
+        },
+        {
+            "id": 77,
+            "title": "jhguy",
+            "genre": " jhbhjb",
+            "release_date": "2025-03-26T22:04:31.1814921+05:30",
+            "rating": 4.9,
+            "platforms": [
+                "tyfyu"
+            ],
+            "price": 545,
+            "is_multiplayer": false
+        }
+    ]
+}

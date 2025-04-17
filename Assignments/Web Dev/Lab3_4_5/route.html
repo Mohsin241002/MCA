@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Route Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+               var map = L.map('map').setView([51.505, -0.09], 13);  // Set initial view (latitude, longitude, zoom level)
+
+// Add OpenStreetMap tiles
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
+}).addTo(map);
+
+// Define the start and end points (latitude, longitude)
+var startPoint = [51.505, -0.09];
+var endPoint = [51.515, -0.1];
+
+// Add markers for the start and end points
+L.marker(startPoint).addTo(map).bindPopup("Start Point").openPopup();
+L.marker(endPoint).addTo(map).bindPopup("End Point");
+
+// Draw a route (polyline) between the start and end points
+var route = L.polyline([startPoint, endPoint], { color: 'blue' }).addTo(map);
+
+// Zoom the map to fit the route
+map.fitBounds(route.getBounds());
+</script>
+</body>
+</html>
+

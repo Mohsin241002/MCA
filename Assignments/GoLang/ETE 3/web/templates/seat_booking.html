@@ -1,0 +1,74 @@
+{{ define "content" }}
+<div class="row mb-4" id="showInfo">
+    <!-- Show information will be loaded here via JavaScript -->
+    <div class="text-center py-3">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">Select Seats</h3>
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-4">
+                    <div class="screen-container">
+                        <div class="screen">Screen</div>
+                    </div>
+                </div>
+                
+                <div class="seat-map" id="seatMap">
+                    <!-- Seats will be loaded here via JavaScript -->
+                    <div class="text-center py-5">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="seat-legend mt-4">
+                    <div class="d-flex justify-content-center">
+                        <div class="legend-item">
+                            <div class="seat available"></div>
+                            <span>Available</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="seat selected"></div>
+                            <span>Selected</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="seat booked"></div>
+                            <span>Booked</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">Booking Summary</h3>
+            </div>
+            <div class="card-body">
+                <div id="bookingSummary">
+                    <!-- Booking summary will be loaded here via JavaScript -->
+                </div>
+                
+                <div class="alert alert-danger d-none" id="bookingError"></div>
+                
+                <button class="btn btn-primary btn-lg w-100 mt-3" id="bookButton" disabled>Book Now</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}
+
+{{ define "scripts" }}
+<script src="/static/js/seat_booking.js"></script>
+{{ end }} 
