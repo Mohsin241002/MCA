@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Things Actually Work: Links, Ride Apps & IRCTC</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        
+        .slide {
+            background: white;
+            margin: 15px auto;
+            padding: 25px 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            width: 1280px;
+            height: 720px;
+            box-sizing: border-box;
+            page-break-after: always;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .slide h1 {
+            color: #4a5568;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            font-size: 2.0em;
+            line-height: 1.2;
+        }
+        
+        .slide h2 {
+            color: #2d3748;
+            background: linear-gradient(90deg, #e2e8f0, #ffffff);
+            padding: 10px;
+            border-left: 5px solid #667eea;
+            margin: 15px 0 10px 0;
+            font-size: 1.3em;
+            line-height: 1.2;
+        }
+        
+        .slide h3 {
+            color: #4a5568;
+            margin: 12px 0 6px 0;
+            font-size: 1.05em;
+            line-height: 1.2;
+        }
+        
+        .slide ul {
+            padding-left: 20px;
+        }
+        
+        .slide li {
+            margin: 4px 0;
+            line-height: 1.3;
+            font-size: 0.95em;
+        }
+        
+        .slide ol li {
+            margin: 5px 0;
+            line-height: 1.3;
+            font-size: 0.95em;
+        }
+        
+        .code-block {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 12px 0;
+            overflow-x: auto;
+            font-size: 0.9em;
+        }
+        
+        .highlight {
+            background: #fef9e7;
+            padding: 10px;
+            border-left: 4px solid #f6ad55;
+            margin: 10px 0;
+            border-radius: 0 5px 5px 0;
+            font-size: 0.95em;
+        }
+        
+        .alert {
+            background: #fee2e2;
+            padding: 10px;
+            border-left: 4px solid #f87171;
+            margin: 10px 0;
+            border-radius: 0 5px 5px 0;
+            font-size: 0.95em;
+        }
+        
+        .success {
+            background: #dcfce7;
+            padding: 10px;
+            border-left: 4px solid #22c55e;
+            margin: 10px 0;
+            border-radius: 0 5px 5px 0;
+            font-size: 0.95em;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .flow-diagram {
+            background: #f7fafc;
+            padding: 15px;
+            border: 2px dashed #667eea;
+            border-radius: 8px;
+            text-align: center;
+            margin: 15px 0;
+            font-family: monospace;
+            line-height: 1.8;
+        }
+        
+        .slide-number {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+        
+        .slide {
+            position: relative;
+        }
+        
+        .print-instruction {
+            background: #e6fffa;
+            border: 2px solid #38b2ac;
+            padding: 20px;
+            margin: 20px auto;
+            width: 1280px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .emoji-large {
+            font-size: 3em;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 12px 0;
+        }
+
+        .process-step {
+            background: #f8fafc;
+            padding: 10px;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+            margin: 6px 0;
+            font-size: 0.95em;
+        }
+
+        .content-area {
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Adjustments for 16:9 format */
+        .slide p {
+            margin: 8px 0;
+        }
+
+        .title-slide-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-align: center;
+        }
+
+        .slide-1-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            height: 70%;
+        }
+
+        .compact-list li {
+            margin: 3px 0;
+            line-height: 1.25;
+            font-size: 0.9em;
+        }
+
+        .compact-section {
+            margin: 8px 0;
+        }
+
+        .three-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin: 12px 0;
+        }
+
+        /* Ensure perfect fit for screenshot */
+        .slide p {
+            margin: 6px 0;
+            line-height: 1.3;
+            font-size: 0.95em;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 0.9em;
+        }
+
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .flow-diagram {
+            background: #f7fafc;
+            padding: 15px;
+            border: 2px dashed #667eea;
+            border-radius: 8px;
+            text-align: center;
+            margin: 10px 0;
+            font-family: monospace;
+            line-height: 1.6;
+            font-size: 0.9em;
+        }
+
+        .emoji-large {
+            font-size: 2.5em;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        /* Specific adjustments for content-heavy slides */
+        .slide.dense h2 {
+            margin: 10px 0 8px 0;
+            font-size: 1.2em;
+        }
+
+        .slide.dense .process-step {
+            padding: 8px;
+            margin: 4px 0;
+        }
+
+        .slide.dense .compact-list li {
+            margin: 2px 0;
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+<body>
+    <div class="print-instruction">
+        <h2>📋 Instructions for Creating PowerPoint</h2>
+        <p><strong>Copy each slide content below into individual PowerPoint slides. Each section represents one slide.</strong></p>
+        <p>💡 <em>Tip: You can also present this directly in full-screen browser mode (Press F11)</em></p>
+    </div>
+
+    <!-- Slide 1 -->
+    <div class="slide">
+        <div class="slide-number">01</div>
+        <div class="title-slide-content">
+            <h1 style="border: none; margin-bottom: 30px;">How Things Actually Work</h1>
+            <div class="emoji-large">🔗 🚗 🚆</div>
+            <h2 style="background: none; border: none; color: #667eea; margin: 20px 0;">Links • Ride Apps • IRCTC</h2>
+            <p style="font-size: 1.3em; color: #666; margin: 30px 0;">Understanding the Complex Systems Behind Simple Actions</p>
+            
+            <div class="highlight" style="margin-top: 40px; text-align: left; max-width: 800px;">
+                <strong>Today's Journey:</strong>
+                <ul class="compact-list">
+                    <li><strong>Part 1:</strong> How clicking a link actually works (DNS & Security)</li>
+                    <li><strong>Part 2:</strong> How Ola/Uber finds you the perfect ride</li>
+                    <li><strong>Part 3:</strong> How IRCTC handles millions of Tatkal bookings</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide">
+        <div class="slide-number">02</div>
+        <h1>Why Think "How Things Actually Work"?</h1>
+        
+        <div class="content-area">
+            <h2>The Surface vs Reality</h2>
+            
+            <div class="two-column">
+                <div>
+                    <h3>🤔 What Most People See:</h3>
+                    <ul class="compact-list">
+                        <li>"I click a link and it opens"</li>
+                        <li>"I book a cab and it arrives"</li>
+                        <li>"I book a train ticket and get confirmed"</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>🔍 What We Need to See:</h3>
+                    <ul class="compact-list">
+                        <li>15+ systems working together</li>
+                        <li>Complex algorithms and databases</li>
+                        <li>Real-time distributed systems</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2>Why This Matters for You</h2>
+            <div class="two-column">
+                <div>
+                    <ul class="compact-list">
+                        <li><strong>Better Problem Solving:</strong> Debug issues faster</li>
+                        <li><strong>System Design Skills:</strong> Design scalable applications</li>
+                        <li><strong>Security Awareness:</strong> Identify vulnerabilities</li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="compact-list">
+                        <li><strong>Interview Preparation:</strong> Answer "how does X work?" questions</li>
+                        <li><strong>Career Growth:</strong> Become a solutions architect</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide">
+        <div class="slide-number">03</div>
+        <h1>Part 1: How Links Actually Work</h1>
+        <div class="content-area">
+            <div class="slide-1-grid">
+                <div>
+                    <div class="emoji-large">🔗</div>
+                    
+                    <h2>The Simple Action</h2>
+                    <div class="highlight">
+                        You click on a link to www.flipkart.com
+                    </div>
+                    
+                    <h2>The Hidden Complexity</h2>
+                    <div class="flow-diagram">
+                        URL Parsing → DNS Resolution → Connection → Security → Request → Response → Rendering
+                    </div>
+                </div>
+                
+                <div>
+                    <h3>🎯 What We'll Cover:</h3>
+                    <ul class="compact-list">
+                        <li>Complete step-by-step breakdown</li>
+                        <li>DNS: The Internet's phone book</li>
+                        <li>Security vulnerabilities and attacks</li>
+                        <li>Why this knowledge matters</li>
+                    </ul>
+                    
+                    <div class="alert">
+                        <strong>Mind-blowing fact:</strong> A single click involves querying servers across 4 different continents in under 100 milliseconds!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="slide">
+        <div class="slide-number">04</div>
+        <h1>Step 1-3: URL Parsing & DNS Resolution</h1>
+        
+        <div class="content-area">
+            <h2>What Happens First</h2>
+            
+            <div class="two-column">
+                <div>
+                    <div class="process-step compact-section">
+                        <h3>Step 1: URL Parsing</h3>
+                        <p><strong>Input:</strong> https://www.flipkart.com/electronics</p>
+                        <ul class="compact-list">
+                            <li><strong>Protocol:</strong> https (secure)</li>
+                            <li><strong>Domain:</strong> www.flipkart.com</li>
+                            <li><strong>Path:</strong> /electronics</li>
+                        </ul>
+                    </div>
+
+                    <div class="process-step compact-section">
+                        <h3>Step 2: Check Caches</h3>
+                        <ul class="compact-list">
+                            <li>Browser cache (recent visits)</li>
+                            <li>Operating system cache</li>
+                            <li>Router cache</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="process-step compact-section">
+                        <h3>Step 3: DNS Resolution Journey</h3>
+                        <div class="flow-diagram" style="font-size: 0.8em;">
+                            Your Computer → ISP DNS Server → Root Server → .com Server → Flipkart's Server → IP Address: 163.53.78.110
+                        </div>
+                    </div>
+
+                    <div class="success">
+                        <strong>Result:</strong> www.flipkart.com → 163.53.78.110 (typically takes 20-100ms)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="slide">
+        <div class="slide-number">05</div>
+        <h1>DNS: The Internet's Phone Book</h1>
+        
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <h2>Why DNS Exists</h2>
+                    <div class="two-column" style="gap: 15px;">
+                        <div>
+                            <h3>🧠 Human-Friendly:</h3>
+                            <ul class="compact-list">
+                                <li>google.com</li>
+                                <li>facebook.com</li>
+                                <li>youtube.com</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>🖥️ Computer-Friendly:</h3>
+                            <ul class="compact-list">
+                                <li>172.217.164.142</li>
+                                <li>157.240.241.35</li>
+                                <li>208.65.153.238</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h2>DNS Hierarchy</h2>
+                    <div class="flow-diagram">
+                        Root Servers (.)<br>
+                        ↓<br>
+                        Top Level Domains (.com, .org, .in)<br>
+                        ↓<br>
+                        Domain Names (google.com, flipkart.com)<br>
+                        ↓<br>
+                        Subdomains (www, mail, api)
+                    </div>
+                </div>
+            </div>
+            
+            <h3>🌍 Global Infrastructure:</h3>
+            <div class="three-column">
+                <div><strong>13 Root Servers</strong> worldwide (managed by different organizations)</div>
+                <div><strong>Hundreds of TLD servers</strong> for different extensions</div>
+                <div><strong>Millions of authoritative servers</strong> for individual domains</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6 -->
+    <div class="slide">
+        <div class="slide-number">06</div>
+        <h1>DNS Security Vulnerabilities</h1>
+        
+        <div class="content-area">
+            <h2>Why DNS is Vulnerable</h2>
+            <div class="alert">
+                <strong>Designed in 1983:</strong> When internet was small and trusted
+                <ul class="compact-list">
+                    <li>No built-in security</li>
+                    <li>Plain text communication</li>
+                    <li>No authentication</li>
+                </ul>
+            </div>
+            
+            <h2>Common DNS Attacks</h2>
+            
+            <div class="two-column">
+                <div>
+                    <h3>🌊 1. DNS Flood Attack (DoS)</h3>
+                    <ul class="compact-list">
+                        <li><strong>Method:</strong> Overwhelm DNS server with massive queries</li>
+                        <li><strong>Result:</strong> Websites become unreachable</li>
+                        <li><strong>Example:</strong> 2016 Dyn attack took down Twitter, Netflix</li>
+                    </ul>
+                    
+                    <h3>☠️ 2. DNS Cache Poisoning</h3>
+                    <ul class="compact-list">
+                        <li><strong>Method:</strong> Inject fake DNS responses into cache</li>
+                        <li><strong>Process:</strong> Attacker races to respond before real server</li>
+                        <li><strong>Result:</strong> Users redirected to malicious sites</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>🕵️ 3. Man-in-the-Middle via DNS</h3>
+                    <ul class="compact-list">
+                        <li><strong>Method:</strong> Control DNS server (WiFi hotspots)</li>
+                        <li><strong>Result:</strong> All traffic routed through attacker</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7 -->
+    <div class="slide">
+        <div class="slide-number">07</div>
+        <h1>Step 4-7: Connection to Response</h1>
+        
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <div class="process-step compact-section">
+                        <h3>Step 4: TCP Connection</h3>
+                        <p><strong>Three-way handshake with server:</strong></p>
+                        <ul class="compact-list">
+                            <li>Your computer: "Can I connect?" (SYN)</li>
+                            <li>Server: "Yes, connect!" (SYN-ACK)</li>
+                            <li>Your computer: "Connected!" (ACK)</li>
+                        </ul>
+                    </div>
+
+                    <div class="process-step compact-section">
+                        <h3>Step 5: HTTPS Security</h3>
+                        <ul class="compact-list">
+                            <li>Certificate verification (is this really Flipkart?)</li>
+                            <li>Encryption key exchange</li>
+                            <li>Secure tunnel established</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="process-step compact-section">
+                        <h3>Step 6: HTTP Request</h3>
+                        <div class="code-block" style="font-size: 0.7em;">
+GET /electronics HTTP/1.1
+Host: www.flipkart.com
+User-Agent: Chrome/91.0.4472.124
+Cookie: session_id=abc123...
+                        </div>
+                    </div>
+
+                    <div class="process-step compact-section">
+                        <h3>Step 7: Server Processing</h3>
+                        <ul class="compact-list">
+                            <li>Load balancer routes request</li>
+                            <li>Application server processes</li>
+                            <li>Database queries executed</li>
+                            <li>HTML response generated</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8 -->
+    <div class="slide">
+        <div class="slide-number">08</div>
+        <h1>Part 2: How Ola/Uber Finds Your Ride</h1>
+        <div class="content-area">
+            <div class="slide-1-grid">
+                <div>
+                    <div class="emoji-large">🚗</div>
+                    
+                    <h2>The Simple Action</h2>
+                    <div class="highlight">
+                        You open Ola, set destination, and book a ride. A driver accepts in 10 seconds!
+                    </div>
+                </div>
+                
+                <div>
+                    <h2>The Hidden Complexity</h2>
+                    <ul class="compact-list">
+                        <li><strong>Real-time location tracking</strong> of millions of users</li>
+                        <li><strong>Complex matching algorithms</strong> considering 15+ factors</li>
+                        <li><strong>Dynamic pricing</strong> based on supply-demand</li>
+                        <li><strong>Route optimization</strong> for efficiency</li>
+                        <li><strong>Distributed systems</strong> handling millions of requests</li>
+                    </ul>
+                    
+                    <div class="success">
+                        <strong>Scale:</strong> Uber processes 15 million trips per day across 70+ countries!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9 -->
+    <div class="slide">
+        <div class="slide-number">09</div>
+        <h1>Step 1: Location Detection & Tracking</h1>
+        
+        <div class="content-area">
+            <h2>How Your Phone Knows Where You Are</h2>
+            
+            <div class="three-column">
+                <div>
+                    <h3>📡 GPS (Primary)</h3>
+                    <ul class="compact-list">
+                        <li>Satellites in space</li>
+                        <li>Accurate to 3-5 meters</li>
+                        <li>Works best outdoors</li>
+                        <li>Takes 10-30 seconds</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>📶 Cell Tower Triangulation</h3>
+                    <ul class="compact-list">
+                        <li>Uses nearby cell towers</li>
+                        <li>Accurate to 100-500 meters</li>
+                        <li>Works indoors</li>
+                        <li>Nearly instant</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>📍 WiFi-based Location</h3>
+                    <ul class="compact-list">
+                        <li>Database of WiFi router locations</li>
+                        <li>Accurate to 10-50 meters</li>
+                        <li>Great for indoor positioning</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2>Continuous Tracking</h2>
+            <div class="process-step">
+                <p><strong>Your phone sends location updates every 3-5 seconds when app is active</strong></p>
+                <div class="two-column">
+                    <div>
+                        <ul class="compact-list">
+                            <li>Latitude: 12.9716° N</li>
+                            <li>Longitude: 77.5946° E</li>
+                            <li>Timestamp: 2024-06-17 14:23:45</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="compact-list">
+                            <li>Speed: 15 km/h</li>
+                            <li>Direction: Northeast</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10 -->
+    <div class="slide">
+        <div class="slide-number">10</div>
+        <h1>Step 2: Driver Matching Algorithm</h1>
+        
+        <div class="content-area">
+            <h2>The Matching Challenge</h2>
+            <div class="highlight">
+                <strong>Problem:</strong> At 6 PM in Bangalore, 10,000 people want rides and 8,000 drivers are available. How do you match them optimally?
+            </div>
+            
+            <div class="two-column">
+                <div>
+                    <h2>Factors Considered (15+ parameters)</h2>
+                    
+                    <div class="two-column" style="gap: 15px;">
+                        <div>
+                            <h3>🚗 Driver Factors:</h3>
+                            <ul class="compact-list">
+                                <li>Distance from pickup (primary)</li>
+                                <li>Driver rating (4.2, 4.8, etc.)</li>
+                                <li>Vehicle type match</li>
+                                <li>Driver's acceptance rate</li>
+                                <li>Time since last trip</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>🎯 Trip Factors:</h3>
+                            <ul class="compact-list">
+                                <li>User's rating</li>
+                                <li>Trip distance</li>
+                                <li>Traffic conditions</li>
+                                <li>Time of day</li>
+                                <li>Historical data</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h2>The Algorithm Process</h2>
+                    <ol class="compact-list">
+                        <li><strong>Geofencing:</strong> Find drivers within 2km radius</li>
+                        <li><strong>Filtering:</strong> Remove busy/offline drivers</li>
+                        <li><strong>Scoring:</strong> Calculate match score for each driver</li>
+                        <li><strong>Ranking:</strong> Sort by best matches</li>
+                        <li><strong>Sequential Offering:</strong> Offer to top 3 drivers</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 11 -->
+    <div class="slide">
+        <div class="slide-number">11</div>
+        <h1>Step 3: Dynamic Pricing & ETA Calculation</h1>
+        
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <h2>Surge Pricing Algorithm</h2>
+                    <div class="flow-diagram">
+                        Real-time Demand ÷ Available Supply = Surge Multiplier
+                    </div>
+                    
+                    <h3>📊 How It Works:</h3>
+                    <ul class="compact-list">
+                        <li><strong>High Demand + Low Supply = 2x-5x pricing</strong></li>
+                        <li><strong>Examples:</strong> Airport during flight delays, stadium after match</li>
+                        <li><strong>Updates every 2-3 minutes</strong> based on live data</li>
+                        <li><strong>Heat Maps:</strong> City divided into hexagonal zones</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h2>ETA Calculation</h2>
+                    <div class="process-step">
+                        <h3>🧮 Complex Formula:</h3>
+                        <p><strong>ETA = Base Travel Time + Traffic Factor + Driver Behavior + Historical Data</strong></p>
+                        <ul class="compact-list">
+                            <li><strong>Base Time:</strong> Google Maps API distance/time</li>
+                            <li><strong>Traffic Factor:</strong> Real-time traffic multiplier (1.2x, 1.5x)</li>
+                            <li><strong>Driver Behavior:</strong> This driver typically takes 10% longer</li>
+                            <li><strong>Historical Data:</strong> This route usually has delays at 6 PM</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="success">
+                        <strong>Accuracy:</strong> Uber's ETA is correct within 1-2 minutes 85% of the time
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 12 -->
+    <div class="slide">
+        <div class="slide-number">12</div>
+        <h1>The Technology Behind Ride Apps</h1>
+        
+        <div class="content-area">
+            <h2>Distributed System Architecture</h2>
+            
+            <div class="flow-diagram" style="font-size: 0.9em;">
+                Mobile Apps → Load Balancer → Microservices → Databases → Real-time Processing
+            </div>
+            
+            <h3>🏗️ Key Components:</h3>
+            
+            <div class="two-column">
+                <div>
+                    <div class="process-step compact-section">
+                        <h3>1. Location Service</h3>
+                        <ul class="compact-list">
+                            <li>Handles millions of GPS updates per second</li>
+                            <li>Uses Redis for fast in-memory storage</li>
+                            <li>Geospatial databases for proximity queries</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="process-step compact-section">
+                        <h3>2. Matching Service</h3>
+                        <ul class="compact-list">
+                            <li>Machine learning algorithms</li>
+                            <li>Real-time decision making (under 1 second)</li>
+                            <li>A/B testing for algorithm improvements</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="process-step compact-section">
+                        <h3>3. Payment Processing</h3>
+                        <ul class="compact-list">
+                            <li>Multiple payment gateways</li>
+                            <li>Fraud detection systems</li>
+                            <li>Currency conversion for international rides</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="alert">
+                        <strong>Challenge:</strong> All of this must work flawlessly even when millions of people are booking rides simultaneously during peak hours!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 13 -->
+    <div class="slide">
+        <div class="slide-number">13</div>
+        <h1>Part 3: How IRCTC Handles Tatkal Booking</h1>
+        <div class="content-area">
+            <div class="slide-1-grid">
+                <div>
+                    <div class="emoji-large">🚆</div>
+                    
+                    <h2>The Challenge</h2>
+                    <div class="alert">
+                        <strong>10 AM Sharp:</strong> 2 million people trying to book tickets for the same train at the exact same moment!
+                    </div>
+                    
+                    <h2>The Scale</h2>
+                    <ul class="compact-list">
+                        <li><strong>Peak Traffic:</strong> 120,000 concurrent users per second</li>
+                        <li><strong>Transactions:</strong> 5 lakh tickets booked daily</li>
+                        <li><strong>Revenue:</strong> ₹100+ crores daily</li>
+                        <li><strong>Database:</strong> Handles 700 million+ user accounts</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h2>What We'll Explore</h2>
+                    <ul class="compact-list">
+                        <li>How IRCTC prevents the system from crashing</li>
+                        <li>Fair booking algorithms</li>
+                        <li>Anti-fraud mechanisms</li>
+                        <li>Why you sometimes get "Service Unavailable"</li>
+                    </ul>
+                    
+                    <div class="success">
+                        <strong>Fun Fact:</strong> IRCTC is one of the world's largest e-commerce platforms by transaction volume!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 14 -->
+    <div class="slide dense">
+        <div class="slide-number">14</div>
+        <h1>IRCTC System Architecture</h1>
+        
+        <div class="content-area">
+            <h2>Multi-Layer Defense System</h2>
+            
+            <div class="process-step compact-section">
+                <h3>🚪 Layer 1: Load Balancers</h3>
+                <ul class="compact-list">
+                    <li><strong>Purpose:</strong> Distribute traffic across multiple servers</li>
+                    <li><strong>Capacity:</strong> Handle 120,000 requests per second</li>
+                    <li><strong>Smart Routing:</strong> Send users to least busy servers</li>
+                </ul>
+            </div>
+            
+            <div class="process-step compact-section">
+                <h3>🏠 Layer 2: Web Servers</h3>
+                <ul class="compact-list">
+                    <li><strong>Quantity:</strong> 100+ servers running simultaneously</li>
+                    <li><strong>Auto-scaling:</strong> More servers added during peak times</li>
+                    <li><strong>Geographic Distribution:</strong> Servers in Mumbai, Delhi, Bangalore</li>
+                </ul>
+            </div>
+            
+            <div class="process-step compact-section">
+                <h3>🗄️ Layer 3: Database Cluster</h3>
+                <ul class="compact-list">
+                    <li><strong>Master-Slave Setup:</strong> Multiple database copies</li>
+                    <li><strong>Real-time Sync:</strong> All databases stay updated</li>
+                    <li><strong>ACID Compliance:</strong> Ensures data consistency</li>
+                </ul>
+            </div>
+            
+            <div class="success">
+                <strong>Result:</strong> System can theoretically handle 10 million users, but deliberately limits access to ensure stability
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 15 -->
+    <div class="slide dense">
+        <div class="slide-number">15</div>
+        <h1>Queue Management & Fair Booking</h1>
+        
+        <div class="content-area">
+            <h2>The Virtual Queue System</h2>
+            
+            <div class="highlight">
+                <strong>Problem:</strong> If 2 million people hit the server at 10:00:00 AM, the system will crash
+            </div>
+            
+            <h2>Solution: Controlled Access</h2>
+            
+            <div class="two-column">
+                <div>
+                    <div class="process-step compact-section">
+                        <h3>🎫 1. Token-Based System</h3>
+                        <ul class="compact-list">
+                            <li>Users get unique tokens when they login</li>
+                            <li>Tokens have priority scores</li>
+                            <li>Only limited tokens allowed to book at once</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="process-step compact-section">
+                        <h3>⏰ 2. Time-based Releases</h3>
+                        <ul class="compact-list">
+                            <li><strong>10:00:00:</strong> First 50,000 users allowed</li>
+                            <li><strong>10:00:30:</strong> Next 50,000 users allowed</li>
+                            <li><strong>10:01:00:</strong> Next batch, and so on...</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="process-step compact-section">
+                        <h3>🎯 3. Priority Algorithm</h3>
+                        <ul class="compact-list">
+                            <li><strong>Login Time:</strong> Earlier login = higher priority</li>
+                            <li><strong>User History:</strong> Regular users get slight preference</li>
+                            <li><strong>Payment History:</strong> Users with successful payments prioritized</li>
+                            <li><strong>Geographic Load:</strong> Balance across regions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 16 -->
+    <div class="slide">
+        <div class="slide-number">16</div>
+        <h1>Real-time Inventory Management</h1>
+        
+        <div class="content-area">
+            <h2>The Seat Booking Challenge</h2>
+            <div class="alert">
+                <strong>Scenario:</strong> Train has 72 seats. 5000 people are trying to book simultaneously. How do you ensure no double booking?
+            </div>
+            
+            <div class="three-column">
+                <div>
+                    <div class="process-step compact-section">
+                        <h3>🔒 1. Pessimistic Locking</h3>
+                        <ul class="compact-list">
+                            <li>When someone starts booking, seats get "locked"</li>
+                            <li>Other users see "seats not available"</li>
+                            <li>Lock released after 10 minutes if payment not completed</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="process-step compact-section">
+                        <h3>⚡ 2. Atomic Transactions</h3>
+                        <p><strong>All-or-Nothing Principle:</strong></p>
+                        <ul class="compact-list">
+                            <li>Either the entire booking succeeds OR it completely fails</li>
+                            <li>No partial bookings (half-booked tickets)</li>
+                            <li>Database rollback if any step fails</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="process-step compact-section">
+                        <h3>🎯 3. FIFO with Priority</h3>
+                        <ul class="compact-list">
+                            <li><strong>Base Rule:</strong> First-come, first-served</li>
+                            <li><strong>Priority Exceptions:</strong> Senior citizens, disabled passengers</li>
+                            <li><strong>Quota System:</strong> Different quotas (General, Ladies, Senior)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 17 -->
+    <div class="slide dense">
+        <div class="slide-number">17</div>
+        <h1>Anti-Fraud & Security Measures</h1>
+        
+        <div class="content-area">
+            <h2>The Fraud Challenge</h2>
+            <div class="alert">
+                <strong>Problem:</strong> Automated bots, ticket touts, and bulk booking attempts trying to game the system
+            </div>
+            
+            <div class="two-column">
+                <div>
+                    <div class="process-step compact-section">
+                        <h3>🤖 1. Bot Detection</h3>
+                        <ul class="compact-list">
+                            <li><strong>CAPTCHA:</strong> Visual puzzles that humans can solve</li>
+                            <li><strong>Behavioral Analysis:</strong> Mouse movements, typing patterns</li>
+                            <li><strong>Request Patterns:</strong> Too many requests = suspicious</li>
+                            <li><strong>Browser Fingerprinting:</strong> Unique device identification</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="process-step compact-section">
+                        <h3>🎫 2. Booking Limits</h3>
+                        <ul class="compact-list">
+                            <li><strong>Per User:</strong> Maximum 6 passengers per booking</li>
+                            <li><strong>Per Day:</strong> Limited bookings per user per day</li>
+                            <li><strong>Per IP Address:</strong> Multiple accounts from same IP flagged</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="process-step compact-section">
+                        <h3>💳 3. Payment Verification</h3>
+                        <ul class="compact-list">
+                            <li><strong>OTP Verification:</strong> SMS/Email confirmation required</li>
+                            <li><strong>Card Validation:</strong> Real-time fraud detection</li>
+                            <li><strong>Payment Time Limit:</strong> 10 minutes to complete payment</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="success">
+                        <strong>Result:</strong> 90%+ reduction in fraudulent bookings while maintaining user experience
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 18 -->
+    <div class="slide dense">
+        <div class="slide-number">18</div>
+        <h1>Why "Service Unavailable" Happens</h1>
+        
+        <div class="content-area">
+            <h2>Common User Frustrations</h2>
+            <div class="highlight">
+                <ul class="compact-list">
+                    <li>"Website crashes exactly at 10 AM"</li>
+                    <li>"I was in queue, then got kicked out"</li>
+                    <li>"Payment failed but money got deducted"</li>
+                    <li>"Seats showing available but can't book"</li>
+                </ul>
+            </div>
+            
+            <div class="three-column">
+                <div>
+                    <div class="process-step compact-section">
+                        <h3>🌊 1. Traffic Overload</h3>
+                        <ul class="compact-list">
+                            <li><strong>Peak Load:</strong> 2 million users hitting at exact same time</li>
+                            <li><strong>Infrastructure Limit:</strong> Servers can only handle so much</li>
+                            <li><strong>Cascading Failures:</strong> One server failure affects others</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="process-step compact-section">
+                        <h3>🔄 2. Database Bottlenecks</h3>
+                        <ul class="compact-list">
+                            <li><strong>Lock Contention:</strong> Multiple users trying to book same seat</li>
+                            <li><strong>Query Timeout:</strong> Database takes too long to respond</li>
+                            <li><strong>Memory Issues:</strong> System runs out of available memory</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="process-step compact-section">
+                        <h3>💸 3. Payment Gateway Issues</h3>
+                        <ul class="compact-list">
+                            <li><strong>Bank Server Down:</strong> External dependency failure</li>
+                            <li><strong>Network Latency:</strong> Slow communication between systems</li>
+                            <li><strong>Timeout Issues:</strong> Payment takes longer than expected</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 19 -->
+    <div class="slide">
+        <div class="slide-number">19</div>
+        <h1>Comparing All Three Systems</h1>
+        
+        <div class="content-area">
+            <h2>Scale and Complexity Comparison</h2>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>🔗 DNS/Links</th>
+                            <th>🚗 Ride Apps</th>
+                            <th>🚆 IRCTC</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Peak Users</strong></td>
+                            <td>Billions globally</td>
+                            <td>Millions per city</td>
+                            <td>2M simultaneous</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Response Time</strong></td>
+                            <td>100-200ms</td>
+                            <td>1-3 seconds</td>
+                            <td>3-10 seconds</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data Consistency</strong></td>
+                            <td>Eventually consistent</td>
+                            <td>Real-time critical</td>
+                            <td>ACID compliant</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Failure Impact</strong></td>
+                            <td>Websites unreachable</td>
+                            <td>No rides available</td>
+                            <td>Revenue loss</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Security Priority</strong></td>
+                            <td>Highest (trust)</td>
+                            <td>High (safety)</td>
+                            <td>High (financial)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h2>Common Patterns</h2>
+            <ul class="compact-list">
+                <li><strong>Distributed Architecture:</strong> All three use multiple servers</li>
+                <li><strong>Caching:</strong> Store frequently accessed data</li>
+                <li><strong>Load Balancing:</strong> Distribute traffic across servers</li>
+                <li><strong>Real-time Processing:</strong> Handle requests instantly</li>
+                <li><strong>Fault Tolerance:</strong> Continue working despite failures</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 20 -->
+    <div class="slide dense">
+        <div class="slide-number">20</div>
+        <h1>Key Engineering Principles</h1>
+        
+        <div class="content-area">
+            <h2>What Makes These Systems Work</h2>
+            
+            <div class="three-column">
+                <div class="process-step compact-section">
+                    <h3>⚖️ Scalability</h3>
+                    <ul class="compact-list">
+                        <li>Horizontal scaling (more servers)</li>
+                        <li>Auto-scaling based on load</li>
+                        <li>Microservices architecture</li>
+                    </ul>
+                </div>
+                <div class="process-step compact-section">
+                    <h3>🛡️ Reliability</h3>
+                    <ul class="compact-list">
+                        <li>Redundancy (backup systems)</li>
+                        <li>Circuit breakers</li>
+                        <li>Graceful degradation</li>
+                    </ul>
+                </div>
+                <div class="process-step compact-section">
+                    <h3>⚡ Performance</h3>
+                    <ul class="compact-list">
+                        <li>Caching at multiple levels</li>
+                        <li>Database optimization</li>
+                        <li>CDNs for static content</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2>Design Trade-offs</h2>
+            
+            <div class="process-step compact-section">
+                <h3>🎯 CAP Theorem</h3>
+                <p><strong>You can only guarantee 2 out of 3:</strong></p>
+                <div class="two-column">
+                    <div>
+                        <ul class="compact-list">
+                            <li><strong>Consistency:</strong> All nodes see same data simultaneously</li>
+                            <li><strong>Availability:</strong> System remains operational</li>
+                            <li><strong>Partition Tolerance:</strong> Works despite network failures</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="highlight">
+                            <h4>System Choices:</h4>
+                            <ul class="compact-list">
+                                <li><strong>🔗 DNS:</strong> A + P (Sacrifices consistency)</li>
+                                <li><strong>🚆 IRCTC:</strong> C + A (Sacrifices partition tolerance)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 21 -->
+    <div class="slide dense">
+        <div class="slide-number">21</div>
+        <h1>Real-World Applications & Career Impact</h1>
+        
+        <div class="content-area">
+            <h2>How This Knowledge Helps You</h2>
+            
+            <div class="two-column">
+                <div>
+                    <div class="process-step compact-section">
+                        <h3>💼 1. Job Interviews</h3>
+                        <ul class="compact-list">
+                            <li><strong>System Design Questions:</strong> "Design a URL shortener like bit.ly"</li>
+                            <li><strong>Architecture Discussions:</strong> Understanding distributed systems</li>
+                            <li><strong>Problem Solving:</strong> Debug production issues faster</li>
+                            <li><strong>Technology Choices:</strong> Pick right tools for the job</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="process-step compact-section">
+                        <h3>🏗️ 2. Building Your Own Systems</h3>
+                        <ul class="compact-list">
+                            <li><strong>E-commerce Platform:</strong> Handle traffic spikes during sales</li>
+                            <li><strong>Social Media App:</strong> Real-time feeds and notifications</li>
+                            <li><strong>Gaming Platform:</strong> Low-latency matchmaking</li>
+                            <li><strong>IoT Applications:</strong> Process sensor data at scale</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="process-step compact-section">
+                        <h3>🚀 3. Career Progression</h3>
+                        <ul class="compact-list">
+                            <li><strong>Senior Developer:</strong> Design scalable applications</li>
+                            <li><strong>Solution Architect:</strong> Choose right technology stack</li>
+                            <li><strong>Technical Lead:</strong> Guide team on best practices</li>
+                            <li><strong>Engineering Manager:</strong> Make informed technical decisions</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="success">
+                        <strong>Salary Impact:</strong> Understanding distributed systems can increase your salary by 40-60% compared to basic development roles
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 22 -->
+    <div class="slide dense">
+        <div class="slide-number">22</div>
+        <h1>What's Next? Emerging Technologies</h1>
+        
+        <div class="content-area">
+            <h2>Future Systems to Watch</h2>
+            
+            <div class="process-step compact-section">
+                <h3>🌐 1. Edge Computing</h3>
+                <div class="two-column">
+                    <div>
+                        <ul class="compact-list">
+                            <li><strong>Problem:</strong> Latency in cloud-based systems</li>
+                            <li><strong>Solution:</strong> Process data closer to users</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="compact-list">
+                            <li><strong>Example:</strong> Autonomous cars need instant decisions</li>
+                            <li><strong>Impact:</strong> 5G + Edge = new possibilities</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="process-step compact-section">
+                <h3>🤖 2. AI-Powered Systems</h3>
+                <div class="two-column">
+                    <div>
+                        <ul class="compact-list">
+                            <li><strong>Smart Load Balancing:</strong> AI predicts traffic patterns</li>
+                            <li><strong>Predictive Scaling:</strong> Add servers before traffic spike</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="compact-list">
+                            <li><strong>Intelligent Caching:</strong> Cache what users will need next</li>
+                            <li><strong>Anomaly Detection:</strong> Spot security threats instantly</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="process-step compact-section">
+                <h3>⛓️ 3. Blockchain & Decentralization</h3>
+                <div class="three-column">
+                    <div><strong>Decentralized DNS:</strong> No single point of failure</div>
+                    <div><strong>Smart Contracts:</strong> Automated booking systems</div>
+                    <div><strong>Identity Management:</strong> User-controlled data</div>
+                </div>
+            </div>
+            
+            <div class="highlight">
+                <strong>Key Insight:</strong> The fundamental principles (scalability, reliability, security) remain the same. Technologies change, but engineering principles endure.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 23 -->
+    <div class="slide dense">
+        <div class="slide-number">23</div>
+        <h1>Key Takeaways</h1>
+        
+        <div class="content-area">
+            <div class="highlight">
+                <h2>🎯 Main Insights</h2>
+                <ul class="compact-list">
+                    <li><strong>Simple actions hide complex systems:</strong> Every click involves dozens of components</li>
+                    <li><strong>Scale creates unique challenges:</strong> What works for 100 users fails for 100 million</li>
+                    <li><strong>Trade-offs are inevitable:</strong> You can't optimize for everything simultaneously</li>
+                    <li><strong>Failure is normal:</strong> Systems must be designed to handle failures gracefully</li>
+                    <li><strong>Security is paramount:</strong> Every system is under constant attack</li>
+                </ul>
+            </div>
+            
+            <div class="two-column">
+                <div>
+                    <h3>🛠️ Technical Knowledge Gained:</h3>
+                    <ul class="compact-list">
+                        <li>DNS and web security</li>
+                        <li>Real-time systems design</li>
+                        <li>Database concurrency</li>
+                        <li>Load balancing strategies</li>
+                        <li>Anti-fraud mechanisms</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>🧠 Problem-Solving Mindset:</h3>
+                    <ul class="compact-list">
+                        <li>Think about scale from day one</li>
+                        <li>Plan for failure scenarios</li>
+                        <li>Understand user behavior</li>
+                        <li>Monitor and measure everything</li>
+                        <li>Iterate and improve continuously</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2>🚀 Next Steps</h2>
+            <ul class="compact-list">
+                <li><strong>Practice:</strong> Build small distributed systems</li>
+                <li><strong>Learn:</strong> Study system design patterns</li>
+                <li><strong>Experiment:</strong> Try different databases and tools</li>
+                <li><strong>Read:</strong> Follow engineering blogs from big tech companies</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 24 -->
+    <div class="slide">
+        <div class="slide-number">24</div>
+        <h1>Thank You!</h1>
+        
+        <div class="content-area">
+            <div class="title-slide-content">
+                <div class="emoji-large">🎉</div>
+                <h2 style="background: none; border: none; color: #667eea;">Questions & Discussion</h2>
+                
+                <div class="highlight" style="margin: 30px 0; text-align: left; max-width: 800px;">
+                    <h3>🤔 Discussion Topics:</h3>
+                    <ul class="compact-list">
+                        <li>Which system surprised you the most?</li>
+                        <li>What other "simple" actions would you like to understand?</li>
+                        <li>How can you apply these concepts to your current projects?</li>
+                        <li>What challenges have you faced with scaling applications?</li>
+                    </ul>
+                </div>
+                
+                <div class="two-column" style="text-align: left;">
+                    <div>
+                        <h3>📚 Additional Resources</h3>
+                        <ul class="compact-list">
+                            <li><strong>Books:</strong> "Designing Data-Intensive Applications" by Martin Kleppmann</li>
+                            <li><strong>Courses:</strong> System Design courses on educational platforms</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="compact-list" style="margin-top: 38px;">
+                            <li><strong>Blogs:</strong> High Scalability, AWS Architecture Blog</li>
+                            <li><strong>Practice:</strong> LeetCode System Design questions</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 40px; color: #666; font-style: italic;">
+                    "The best way to understand how things work is to try breaking them (safely) and then fixing them!"
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Operators Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .input-section {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .input-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-bottom: 30px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .results {
+            display: none;
+        }
+
+        .results.show {
+            display: block;
+        }
+
+        .operator-section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .operator-section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .result-item {
+            padding: 10px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid #667eea;
+        }
+
+        .result-item .operation {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .result-item .value {
+            color: #764ba2;
+            font-weight: 700;
+        }
+
+        .true {
+            color: #28a745 !important;
+        }
+
+        .false {
+            color: #dc3545 !important;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧮 JavaScript Operators Calculator</h1>
+        
+        <div class="input-section">
+            <div class="input-group">
+                <label for="num1">First Number (a):</label>
+                <input type="number" id="num1" placeholder="Enter first number" value="10">
+            </div>
+            <div class="input-group">
+                <label for="num2">Second Number (b):</label>
+                <input type="number" id="num2" placeholder="Enter second number" value="3">
+            </div>
+        </div>
+
+        <button onclick="calculateAll()">Calculate All Operations</button>
+
+        <div id="results" class="results">
+            <!-- Arithmetic Operators -->
+            <div class="operator-section">
+                <h2>Arithmetic Operators</h2>
+                <div id="arithmetic"></div>
+            </div>
+
+            <!-- Comparison Operators -->
+            <div class="operator-section">
+                <h2>Comparison Operators</h2>
+                <div id="comparison"></div>
+            </div>
+
+            <!-- Logical Operators -->
+            <div class="operator-section">
+                <h2>Logical Operators</h2>
+                <div id="logical"></div>
+            </div>
+
+            <!-- Assignment Operators -->
+            <div class="operator-section">
+                <h2>Assignment Operators</h2>
+                <div id="assignment"></div>
+            </div>
+
+            <!-- Bitwise Operators -->
+            <div class="operator-section">
+                <h2>Bitwise Operators</h2>
+                <div id="bitwise"></div>
+            </div>
+
+            <!-- Other Operators -->
+            <div class="operator-section">
+                <h2>Other Operators</h2>
+                <div id="other"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculateAll() {
+            // Get input values
+            const a = parseFloat(document.getElementById('num1').value);
+            const b = parseFloat(document.getElementById('num2').value);
+
+            
+
+            // Show results section
+            document.getElementById('results').classList.add('show');
+
+            // Arithmetic Operators
+            const arithmetic = [
+                { op: `a + b`, desc: 'Addition', value: a + b },
+                { op: `a - b`, desc: 'Subtraction', value: a - b },
+                { op: `a * b`, desc: 'Multiplication', value: a * b },
+                { op: `a / b`, desc: 'Division', value: a / b },
+                { op: `a % b`, desc: 'Modulus (Remainder)', value: a % b },
+                { op: `a ** b`, desc: 'Exponentiation', value: a ** b },
+            ];
+            displayResults('arithmetic', arithmetic);
+
+            // Comparison Operators
+            const comparison = [
+                { op: `a == b`, desc: 'Equal to', value: a == b },
+                { op: `a === b`, desc: 'Strict equal to', value: a === b },
+                { op: `a != b`, desc: 'Not equal to', value: a != b },
+                { op: `a !== b`, desc: 'Strict not equal to', value: a !== b },
+                { op: `a > b`, desc: 'Greater than', value: a > b },
+                { op: `a < b`, desc: 'Less than', value: a < b },
+                { op: `a >= b`, desc: 'Greater than or equal to', value: a >= b },
+                { op: `a <= b`, desc: 'Less than or equal to', value: a <= b },
+            ];
+            displayResults('comparison', comparison);
+
+            // Logical Operators (treating numbers as boolean)
+            const logical = [
+                { op: `a && b`, desc: 'Logical AND', value: a && b },
+                { op: `a || b`, desc: 'Logical OR', value: a || b },
+                { op: `!a`, desc: 'Logical NOT (a)', value: !a },
+                { op: `!b`, desc: 'Logical NOT (b)', value: !b },
+            ];
+            displayResults('logical', logical);
+
+            // Assignment Operators (demonstrating with temp variable)
+            let temp = a;
+            const assignment = [
+                { op: `temp = a`, desc: 'Assignment', value: temp },
+                { op: `temp += b`, desc: 'Add and assign', value: (temp = a, temp += b, temp) },
+                { op: `temp -= b`, desc: 'Subtract and assign', value: (temp = a, temp -= b, temp) },
+                { op: `temp *= b`, desc: 'Multiply and assign', value: (temp = a, temp *= b, temp) },
+                { op: `temp /= b`, desc: 'Divide and assign', value: (temp = a, temp /= b, temp) },
+                { op: `temp %= b`, desc: 'Modulus and assign', value: (temp = a, temp %= b, temp) },
+                { op: `temp **= b`, desc: 'Exponent and assign', value: (temp = a, temp **= b, temp) },
+            ];
+            displayResults('assignment', assignment);
+
+            // Bitwise Operators (only for integers)
+            const intA = Math.floor(a);
+            const intB = Math.floor(b);
+            const bitwise = [
+                { op: `a & b`, desc: 'Bitwise AND', value: intA & intB },
+                { op: `a | b`, desc: 'Bitwise OR', value: intA | intB },
+                { op: `a ^ b`, desc: 'Bitwise XOR', value: intA ^ intB },
+                { op: `~a`, desc: 'Bitwise NOT (a)', value: ~intA },
+                { op: `a << b`, desc: 'Left shift', value: intA << intB },
+                { op: `a >> b`, desc: 'Right shift', value: intA >> intB },
+                { op: `a >>> b`, desc: 'Unsigned right shift', value: intA >>> intB },
+            ];
+            displayResults('bitwise', bitwise);
+
+            // Other Operators
+            const other = [
+                { op: `typeof a`, desc: 'Type of a', value: typeof a },
+                { op: `typeof b`, desc: 'Type of b', value: typeof b },
+                { op: `a > b ? a : b`, desc: 'Ternary (max value)', value: a > b ? a : b },
+                { op: `a < b ? a : b`, desc: 'Ternary (min value)', value: a < b ? a : b },
+            ];
+            displayResults('other', other);
+        }
+
+        function displayResults(sectionId, results) {
+            const section = document.getElementById(sectionId);
+            section.innerHTML = '';
+            
+            results.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'result-item';
+                
+                let valueClass = '';
+                if (typeof item.value === 'boolean') {
+                    valueClass = item.value ? 'true' : 'false';
+                }
+                
+                div.innerHTML = `
+                    <span class="operation">${item.op} <small>(${item.desc})</small></span>
+                    <span class="value ${valueClass}">${item.value}</span>
+                `;
+                section.appendChild(div);
+            });
+        }
+
+        // Allow Enter key to calculate
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                calculateAll();
+            }
+        });
+
+        // Calculate on page load with default values
+        window.onload = function() {
+            calculateAll();
+        };
+    </script>
+</body>
+</html>
+
